@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "caviercaves:blocks/white_crystal_texture",
+    "particle": "caviercaves:blocks/white_crystal_texture"
+  },
+  "render_type": "translucent"
+}

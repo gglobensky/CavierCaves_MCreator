@@ -1,0 +1,10 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:windswept_savanna": "2023-03-13 00:24:00 -0400",
+      "minecraft:plains": "2023-03-13 00:23:47 -0400"
+    },
+    "done": false
+  },
+  "DataVersion": 3120
+}

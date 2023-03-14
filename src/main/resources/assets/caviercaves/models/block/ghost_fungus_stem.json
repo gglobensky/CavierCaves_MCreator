@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "caviercaves:blocks/ghost_fungus_stem_texture",
+    "up": "caviercaves:blocks/ghost_fungus_stem_texture",
+    "north": "caviercaves:blocks/ghost_fungus_stem_texture",
+    "east": "caviercaves:blocks/ghost_fungus_stem_texture",
+    "south": "caviercaves:blocks/ghost_fungus_stem_texture",
+    "west": "caviercaves:blocks/ghost_fungus_stem_texture",
+    "particle": "caviercaves:blocks/ghost_fungus_stem_texture"
+  },
+  "render_type": "solid"
+}

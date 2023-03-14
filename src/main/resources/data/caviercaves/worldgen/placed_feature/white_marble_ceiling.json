@@ -1,0 +1,27 @@
+{
+  "feature": "caviercaves:white_marble_ceiling",
+  "placement": [
+    {
+      "type": "minecraft:carving_mask",
+      "step": "air"
+    },
+    {
+      "type": "environment_scan",
+      "direction_of_search": "up",
+      "target_condition": {
+        "type": "minecraft:not",
+        "predicate": {
+          "type": "minecraft:matching_blocks",
+          "blocks": [
+            "minecraft:air",
+            "minecraft:water"
+          ]
+        }
+      },
+      "max_steps": 15
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

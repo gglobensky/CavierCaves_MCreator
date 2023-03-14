@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "caviercaves:crystal_cave",
+  "features": "caviercaves:south_lateral_crystal",
+  "step": "underground_structures"
+}

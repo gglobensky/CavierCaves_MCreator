@@ -21,6 +21,7 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
 import net.minecraft.world.level.biome.FeatureSorter;
 import net.minecraft.world.level.biome.Climate;
@@ -30,6 +31,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.Registry;
 import net.minecraft.core.Holder;
 
+import net.gglobensky.caviercaves.world.biome.SpectralCavernsBiome;
 import net.gglobensky.caviercaves.world.biome.CrystalCaveBiome;
 import net.gglobensky.caviercaves.CaviercavesMod;
 
@@ -44,6 +46,7 @@ import com.google.common.base.Suppliers;
 @Mod.EventBusSubscriber
 public class CaviercavesModBiomes {
 	public static final DeferredRegister<Biome> REGISTRY = DeferredRegister.create(ForgeRegistries.BIOMES, CaviercavesMod.MODID);
+	public static final RegistryObject<Biome> SPECTRAL_CAVERNS = REGISTRY.register("spectral_caverns", SpectralCavernsBiome::createBiome);
 	public static final RegistryObject<Biome> CRYSTAL_CAVE = REGISTRY.register("crystal_cave", CrystalCaveBiome::createBiome);
 
 	@SubscribeEvent
@@ -59,6 +62,9 @@ public class CaviercavesModBiomes {
 				// Inject biomes to biome source
 				if (chunkGenerator.getBiomeSource() instanceof MultiNoiseBiomeSource noiseSource) {
 					List<Pair<Climate.ParameterPoint, Holder<Biome>>> parameters = new ArrayList<>(noiseSource.parameters.values());
+					for (Climate.ParameterPoint parameterPoint : SpectralCavernsBiome.UNDERGROUND_PARAMETER_POINTS) {
+						parameters.add(new Pair<>(parameterPoint, biomeRegistry.getOrCreateHolderOrThrow(ResourceKey.create(Registry.BIOME_REGISTRY, SPECTRAL_CAVERNS.getId()))));
+					}
 					for (Climate.ParameterPoint parameterPoint : CrystalCaveBiome.UNDERGROUND_PARAMETER_POINTS) {
 						parameters.add(new Pair<>(parameterPoint, biomeRegistry.getOrCreateHolderOrThrow(ResourceKey.create(Registry.BIOME_REGISTRY, CRYSTAL_CAVE.getId()))));
 					}
@@ -73,6 +79,7 @@ public class CaviercavesModBiomes {
 					SurfaceRules.RuleSource currentRuleSource = noiseGeneratorSettings.surfaceRule();
 					if (currentRuleSource instanceof SurfaceRules.SequenceRuleSource sequenceRuleSource) {
 						List<SurfaceRules.RuleSource> surfaceRules = new ArrayList<>(sequenceRuleSource.sequence());
+						surfaceRules.add(1, anySurfaceRule(ResourceKey.create(Registry.BIOME_REGISTRY, SPECTRAL_CAVERNS.getId()), Blocks.DEEPSLATE.defaultBlockState(), Blocks.DEEPSLATE.defaultBlockState(), Blocks.DEEPSLATE.defaultBlockState()));
 						surfaceRules.add(1, anySurfaceRule(ResourceKey.create(Registry.BIOME_REGISTRY, CRYSTAL_CAVE.getId()), CaviercavesModBlocks.WHITE_MARBLE.get().defaultBlockState(), CaviercavesModBlocks.WHITE_MARBLE.get().defaultBlockState(),
 								CaviercavesModBlocks.WHITE_MARBLE.get().defaultBlockState()));
 						NoiseGeneratorSettings moddedNoiseGeneratorSettings = new NoiseGeneratorSettings(noiseGeneratorSettings.noiseSettings(), noiseGeneratorSettings.defaultBlock(), noiseGeneratorSettings.defaultFluid(),

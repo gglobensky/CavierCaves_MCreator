@@ -2,7 +2,7 @@
   "_fv": 39,
   "_type": "biome",
   "definition": {
-    "name": "Crystal Cave",
+    "name": "Selenite Sanctum",
     "groundBlock": {
       "value": "CUSTOM:WhiteMarble"
     },

@@ -1,0 +1,20 @@
+Bugfixes:
+Correct bug where crystals generate on crystals
+
+Features:
+Add Chromastone - Stone that turns bright when in contact with fungus
+Add Biome Diamond Depths with
+	Brittle basalt - cracks before falling. 
+	Rhyolite - red rock
+	More diamonds than usual
+	Lots of lava
+	Magma cubes?
+2 Resources that spread apart that need to be mixed
+Create mod lamps with crystals? More power for more brightness?
+Add Biome Fossil Forest with
+	Petrified trees
+	lakes
+	ancient ruins?
+	rivers?
+	small ghost fungus and purple one
+	waterfalls?

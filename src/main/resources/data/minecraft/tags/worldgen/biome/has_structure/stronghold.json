@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "caviercaves:crystal_cave"
+    "caviercaves:crystal_cave",
+    "caviercaves:spectral_caverns"
   ]
 }

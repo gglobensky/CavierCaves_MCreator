@@ -138,6 +138,7 @@
     {
       "name": "CrystalCave",
       "type": "biome",
+      "sortid": 60,
       "compiles": true,
       "locked_code": false,
       "registry_name": "crystal_cave",
@@ -750,7 +751,7 @@
       "type": "block",
       "sortid": 54,
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "ghost_fungus_stem",
       "metadata": {
         "files": [
@@ -780,15 +781,45 @@
       "path": "~/Blocks"
     },
     {
-      "name": "GhostFungusShowInsideFace",
-      "type": "procedure",
-      "sortid": 57,
+      "name": "GiantGhostFungus",
+      "type": "feature",
+      "sortid": 58,
       "compiles": true,
-      "locked_code": true,
-      "registry_name": "ghost_fungus_show_inside_face",
+      "locked_code": false,
+      "registry_name": "giant_ghost_fungus",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/caviercaves/procedures/GhostFungusShowInsideFaceProcedure.java"
+          "src/main/resources/data/caviercaves/worldgen/configured_feature/giant_ghost_fungus.json",
+          "src/main/resources/data/caviercaves/forge/biome_modifier/giant_ghost_fungus_biome_modifier.json",
+          "src/main/resources/data/caviercaves/worldgen/placed_feature/giant_ghost_fungus.json"
+        ]
+      },
+      "path": "~/Features"
+    },
+    {
+      "name": "SpectralCaverns",
+      "type": "biome",
+      "sortid": 59,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spectral_caverns",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gglobensky/caviercaves/world/biome/SpectralCavernsBiome.java"
+        ]
+      },
+      "path": "~/Biomes"
+    },
+    {
+      "name": "OnNeighbourChangedBlockstateManager",
+      "type": "procedure",
+      "sortid": 61,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "on_neighbour_changed_blockstate_manager",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gglobensky/caviercaves/procedures/OnNeighbourChangedBlockstateManagerProcedure.java"
         ],
         "dependencies": [
           {
@@ -817,9 +848,10 @@
   "language_map": {
     "en_us": {
       "block.caviercaves.white_crystal": "Crystal",
-      "biome.caviercaves.crystal_cave": "Crystal Cave",
+      "biome.caviercaves.crystal_cave": "Selenite Sanctum",
       "block.caviercaves.white_marble": "White Marble",
       "block.caviercaves.ghost_fungus_block": "Ghost Fungus Block",
+      "biome.caviercaves.spectral_caverns": "Spectral Caverns",
       "block.caviercaves.black_marble": "Black Marble",
       "block.caviercaves.ghost_fungus": "Ghost Fungus",
       "block.caviercaves.ghost_fungus_stem": "Ghost Fungus Stem",

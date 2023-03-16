@@ -16,7 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-import net.gglobensky.caviercaves.procedures.GhostFungusShowInsideFaceProcedure;
+import net.gglobensky.caviercaves.procedures.OnNeighbourChangedBlockstateManagerProcedure;
 
 import java.util.List;
 import java.util.Collections;
@@ -49,7 +49,7 @@ public class GhostFungusBlockBlock extends Block {
 	@Override
 	public void neighborChanged(BlockState blockstate, Level world, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean moving) {
 		super.neighborChanged(blockstate, world, pos, neighborBlock, fromPos, moving);
-		GhostFungusShowInsideFaceProcedure.execute(blockstate, world, pos, fromPos);
+		OnNeighbourChangedBlockstateManagerProcedure.ShowInsideFace(blockstate, world, pos, fromPos);
 	}
 	
 	@Override

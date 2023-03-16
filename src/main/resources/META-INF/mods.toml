@@ -4,11 +4,14 @@ license="Academic Free License v3.0"
 
 [[mods]]
 modId="caviercaves"
-version="1.0.0"
+version="0.0.1"
 displayName="CavierCaves"
 credits="Created using mod maker MCreator - https://mcreator.net/about"
 displayURL="https://mcreator.net"
 authors="Guillaume Globensky, MCreator"
+description='''
+Adding life and variety to Minecraft's underground
+'''
 
 [[dependencies.caviercaves]]
     modId="minecraft"

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "caviercaves:block/ghost_fungus_block"
+  }
+}

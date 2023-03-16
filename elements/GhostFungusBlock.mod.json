@@ -2,17 +2,17 @@
   "_fv": 39,
   "_type": "block",
   "definition": {
-    "texture": "ghost_mushroom_block",
-    "textureTop": "ghost_fungus_stem_top",
-    "textureLeft": "ghost_fungus_stem_texture",
-    "textureFront": "ghost_fungus_stem_texture",
-    "textureRight": "ghost_fungus_stem_texture",
-    "textureBack": "ghost_fungus_stem_texture",
+    "texture": "ghost_fungus_block",
+    "textureTop": "ghost_fungus_block",
+    "textureLeft": "ghost_fungus_block",
+    "textureFront": "ghost_fungus_block",
+    "textureRight": "ghost_fungus_block",
+    "textureBack": "ghost_fungus_block",
     "renderType": 11,
     "customModelName": "Single texture",
     "rotationMode": 0,
     "enablePitch": false,
-    "emissiveRendering": false,
+    "emissiveRendering": true,
     "displayFluidOverlay": false,
     "itemTexture": "",
     "particleTexture": "",
@@ -96,7 +96,7 @@
     "stepSound": {
       "value": ""
     },
-    "luminance": 0,
+    "luminance": 3,
     "unbreakable": false,
     "breakHarvestLevel": 1,
     "isBonemealable": false,
@@ -117,6 +117,9 @@
     "isFluidTank": false,
     "fluidCapacity": 8000,
     "fluidRestrictions": [],
+    "onNeighbourBlockChanges": {
+      "name": "GhostFungusShowInsideFace"
+    },
     "spawnWorldTypes": [],
     "restrictionBiomes": [],
     "blocksToReplace": [

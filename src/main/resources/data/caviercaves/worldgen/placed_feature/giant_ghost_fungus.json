@@ -1,9 +1,0 @@
-{
-  "feature": "caviercaves:giant_ghost_fungus",
-  "placement": [
-    {
-      "type": "minecraft:count_on_every_layer",
-      "count": 4
-    }
-  ]
-}

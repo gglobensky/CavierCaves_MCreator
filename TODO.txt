@@ -1,15 +1,19 @@
 Bugfixes:
 Correct bug where crystals generate on crystals
+muhsrooms get inside shown if water is next to it
 
 Features:
+Add fallen selenite crystals?
 Add Chromastone - Stone that turns bright when in contact with fungus
+	maybe it could change color when in contact with fungus and while in contact allow color cycle in some way, 
+	maybe right click with another mushroom block
 Add Biome Diamond Depths with
 	Brittle basalt - cracks before falling. 
 	Rhyolite - red rock
 	More diamonds than usual
 	Lots of lava
 	Magma cubes?
-2 Resources that spread apart that need to be mixed
+2 Resources spread apart that need to be mixed
 Create mod lamps with crystals? More power for more brightness?
 Add Biome Fossil Forest with
 	Petrified trees
@@ -18,3 +22,6 @@ Add Biome Fossil Forest with
 	rivers?
 	small ghost fungus and purple one
 	waterfalls?
+
+A biome that would fit well in tight spaces
+Make ghost fungus bonemealable

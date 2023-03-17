@@ -1,0 +1,20 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:snowy_slopes": "2023-03-17 01:24:16 -0400",
+      "minecraft:taiga": "2023-03-17 01:23:59 -0400",
+      "minecraft:deep_ocean": "2023-03-17 01:23:32 -0400",
+      "minecraft:bamboo_jungle": "2023-03-17 01:21:38 -0400",
+      "minecraft:river": "2023-03-17 01:26:18 -0400",
+      "minecraft:stony_shore": "2023-03-17 01:23:58 -0400",
+      "minecraft:grove": "2023-03-17 01:24:15 -0400",
+      "minecraft:cold_ocean": "2023-03-17 01:23:55 -0400",
+      "minecraft:forest": "2023-03-17 01:24:47 -0400",
+      "minecraft:ocean": "2023-03-17 01:22:28 -0400",
+      "minecraft:old_growth_birch_forest": "2023-03-17 01:22:19 -0400",
+      "minecraft:plains": "2023-03-17 01:24:21 -0400"
+    },
+    "done": false
+  },
+  "DataVersion": 3120
+}

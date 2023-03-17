@@ -23,6 +23,7 @@ public class CaviercavesModItems {
 	public static final RegistryObject<Item> BLACK_MARBLE = block(CaviercavesModBlocks.BLACK_MARBLE, CaviercavesModTabs.TAB_CAVIER_CAVES);
 	public static final RegistryObject<Item> GHOST_FUNGUS_STEM = block(CaviercavesModBlocks.GHOST_FUNGUS_STEM, CaviercavesModTabs.TAB_CAVIER_CAVES);
 	public static final RegistryObject<Item> GHOST_FUNGUS_BLOCK = block(CaviercavesModBlocks.GHOST_FUNGUS_BLOCK, CaviercavesModTabs.TAB_CAVIER_CAVES);
+	public static final RegistryObject<Item> CHROMASTONE = block(CaviercavesModBlocks.CHROMASTONE, CaviercavesModTabs.TAB_CAVIER_CAVES);
 
 	private static RegistryObject<Item> block(RegistryObject<Block> block, CreativeModeTab tab) {
 		return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));

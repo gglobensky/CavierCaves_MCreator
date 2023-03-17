@@ -1,0 +1,14 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:beach": "2023-03-16 19:49:01 -0400",
+      "minecraft:river": "2023-03-16 19:47:47 -0400",
+      "minecraft:forest": "2023-03-16 19:48:48 -0400",
+      "minecraft:jungle": "2023-03-16 19:48:49 -0400",
+      "minecraft:savanna": "2023-03-16 19:47:34 -0400",
+      "minecraft:plains": "2023-03-16 19:48:45 -0400"
+    },
+    "done": false
+  },
+  "DataVersion": 3120
+}

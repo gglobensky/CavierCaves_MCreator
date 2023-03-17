@@ -1,5 +1,5 @@
 {
-  "block.caviercaves.white_crystal": "Crystal",
+  "block.caviercaves.white_crystal": "Selenite Crystal",
   "biome.caviercaves.crystal_cave": "Selenite Sanctum",
   "block.caviercaves.white_marble": "White Marble",
   "block.caviercaves.ghost_fungus_block": "Ghost Fungus Block",
@@ -7,5 +7,6 @@
   "block.caviercaves.black_marble": "Black Marble",
   "block.caviercaves.ghost_fungus": "Ghost Fungus",
   "block.caviercaves.ghost_fungus_stem": "Ghost Fungus Stem",
+  "block.caviercaves.chromastone": "Chromastone",
   "itemGroup.tabcavier_caves": "Cavier Caves"
 }

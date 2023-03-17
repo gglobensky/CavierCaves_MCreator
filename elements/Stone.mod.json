@@ -7,6 +7,12 @@
     "blocks": [
       {
         "value": "CUSTOM:WhiteMarble"
+      },
+      {
+        "value": "CUSTOM:BlackMarble"
+      },
+      {
+        "value": "CUSTOM:Chromastone"
       }
     ],
     "functions": [],

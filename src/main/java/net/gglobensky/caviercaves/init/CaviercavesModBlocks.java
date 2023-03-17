@@ -15,6 +15,7 @@ import net.gglobensky.caviercaves.block.WhiteCrystalBlock;
 import net.gglobensky.caviercaves.block.GhostFungusStemBlock;
 import net.gglobensky.caviercaves.block.GhostFungusBlockBlock;
 import net.gglobensky.caviercaves.block.GhostFungusBlock;
+import net.gglobensky.caviercaves.block.ChromastoneBlock;
 import net.gglobensky.caviercaves.block.BlackMarbleBlock;
 import net.gglobensky.caviercaves.CaviercavesMod;
 
@@ -26,4 +27,5 @@ public class CaviercavesModBlocks {
 	public static final RegistryObject<Block> BLACK_MARBLE = REGISTRY.register("black_marble", () -> new BlackMarbleBlock());
 	public static final RegistryObject<Block> GHOST_FUNGUS_STEM = REGISTRY.register("ghost_fungus_stem", () -> new GhostFungusStemBlock());
 	public static final RegistryObject<Block> GHOST_FUNGUS_BLOCK = REGISTRY.register("ghost_fungus_block", () -> new GhostFungusBlockBlock());
+	public static final RegistryObject<Block> CHROMASTONE = REGISTRY.register("chromastone", () -> new ChromastoneBlock());
 }

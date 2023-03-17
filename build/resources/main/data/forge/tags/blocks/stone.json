@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "caviercaves:white_marble"
+    "caviercaves:white_marble",
+    "caviercaves:black_marble",
+    "caviercaves:chromastone"
   ]
 }

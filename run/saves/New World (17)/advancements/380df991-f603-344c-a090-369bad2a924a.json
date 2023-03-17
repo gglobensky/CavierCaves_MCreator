@@ -1,0 +1,13 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:taiga": "2023-03-16 19:23:45 -0400",
+      "minecraft:beach": "2023-03-16 19:24:34 -0400",
+      "minecraft:snowy_plains": "2023-03-16 19:24:38 -0400",
+      "minecraft:flower_forest": "2023-03-16 19:26:25 -0400",
+      "minecraft:plains": "2023-03-16 19:24:37 -0400"
+    },
+    "done": false
+  },
+  "DataVersion": 3120
+}

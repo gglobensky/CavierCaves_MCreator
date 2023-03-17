@@ -13,12 +13,16 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 
 import net.gglobensky.caviercaves.world.features.plants.GhostFungusFeature;
 import net.gglobensky.caviercaves.world.features.ores.WhiteMarbleFeature;
+import net.gglobensky.caviercaves.world.features.ores.ChromastoneFeature;
 import net.gglobensky.caviercaves.world.features.ores.BlackMarbleFeature;
 import net.gglobensky.caviercaves.world.features.WestLateralCrystalFeature;
 import net.gglobensky.caviercaves.world.features.SouthLateralCrystalFeature;
 import net.gglobensky.caviercaves.world.features.NorthLateralCrystalFeature;
 import net.gglobensky.caviercaves.world.features.LargeDescendingCrystalFeature;
 import net.gglobensky.caviercaves.world.features.LargeAscendingCrystalFeature;
+import net.gglobensky.caviercaves.world.features.GiantGhostFungusFeatureBKFeature;
+import net.gglobensky.caviercaves.world.features.GiantGhostFungusFeature;
+import net.gglobensky.caviercaves.world.features.GhostFungusSpectralBiomeFeature;
 import net.gglobensky.caviercaves.world.features.GhostFungusFeatureFeature;
 import net.gglobensky.caviercaves.world.features.EastLateralCrystalFeature;
 import net.gglobensky.caviercaves.world.features.DescendingCrystalFeature;
@@ -40,4 +44,8 @@ public class CaviercavesModFeatures {
 	public static final RegistryObject<Feature<?>> EAST_LATERAL_CRYSTAL = REGISTRY.register("east_lateral_crystal", EastLateralCrystalFeature::feature);
 	public static final RegistryObject<Feature<?>> WEST_LATERAL_CRYSTAL = REGISTRY.register("west_lateral_crystal", WestLateralCrystalFeature::feature);
 	public static final RegistryObject<Feature<?>> BLACK_MARBLE = REGISTRY.register("black_marble", BlackMarbleFeature::feature);
+	public static final RegistryObject<Feature<?>> CHROMASTONE = REGISTRY.register("chromastone", ChromastoneFeature::feature);
+	public static final RegistryObject<Feature<?>> GIANT_GHOST_FUNGUS_FEATURE_BK = REGISTRY.register("giant_ghost_fungus_feature_bk", GiantGhostFungusFeatureBKFeature::new);
+	public static final RegistryObject<Feature<?>> GIANT_GHOST_FUNGUS = REGISTRY.register("giant_ghost_fungus", GiantGhostFungusFeature::feature);
+	public static final RegistryObject<Feature<?>> GHOST_FUNGUS_SPECTRAL_BIOME = REGISTRY.register("ghost_fungus_spectral_biome", GhostFungusSpectralBiomeFeature::new);
 }

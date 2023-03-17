@@ -4,10 +4,10 @@
   "definition": {
     "name": "Spectral Caverns",
     "groundBlock": {
-      "value": "Blocks.DEEPSLATE"
+      "value": "CUSTOM:Chromastone"
     },
     "undergroundBlock": {
-      "value": "Blocks.DEEPSLATE"
+      "value": "CUSTOM:Chromastone"
     },
     "underwaterBlock": {
       "value": ""
@@ -52,8 +52,8 @@
       "max": 0.5
     },
     "genWeirdness": {
-      "min": 1.0,
-      "max": 2.0
+      "min": -1.0,
+      "max": 1.0
     },
     "grassPerChunk": 0,
     "seagrassPerChunk": 0,

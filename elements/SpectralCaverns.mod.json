@@ -4,10 +4,10 @@
   "definition": {
     "name": "Spectral Caverns",
     "groundBlock": {
-      "value": "CUSTOM:Chromastone"
+      "value": "CUSTOM:MoonStone"
     },
     "undergroundBlock": {
-      "value": "CUSTOM:Chromastone"
+      "value": "CUSTOM:MoonStone"
     },
     "underwaterBlock": {
       "value": ""
@@ -53,7 +53,7 @@
     },
     "genWeirdness": {
       "min": -1.0,
-      "max": 1.0
+      "max": -0.5
     },
     "grassPerChunk": 0,
     "seagrassPerChunk": 0,

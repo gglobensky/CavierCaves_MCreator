@@ -12,7 +12,10 @@
         "value": "CUSTOM:BlackMarble"
       },
       {
-        "value": "CUSTOM:Chromastone"
+        "value": "CUSTOM:MoonStone"
+      },
+      {
+        "value": "CUSTOM:DullMoonStone"
       }
     ],
     "functions": [],

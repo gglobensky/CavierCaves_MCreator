@@ -1,0 +1,9 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "caviercaves:blocks/chromastone",
+    "top": "caviercaves:blocks/chromastone",
+    "side": "caviercaves:blocks/chromastone"
+  },
+  "render_type": "solid"
+}

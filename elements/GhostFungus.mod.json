@@ -83,15 +83,15 @@
       "name": "IsUnderground"
     },
     "isBonemealable": false,
-    "frequencyOnChunks": 2,
+    "frequencyOnChunks": 0,
     "spawnWorldTypes": [
       "Surface"
     ],
     "restrictionBiomes": [],
     "generateCondition": {
-      "name": "CanGhostFungusGrow"
+      "name": "IsUnderground"
     },
     "patchSize": 2,
-    "generateAtAnyHeight": true
+    "generateAtAnyHeight": false
   }
 }

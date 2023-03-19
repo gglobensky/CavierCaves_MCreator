@@ -78,8 +78,8 @@ public class CaviercavesModBiomes {
 					SurfaceRules.RuleSource currentRuleSource = noiseGeneratorSettings.surfaceRule();
 					if (currentRuleSource instanceof SurfaceRules.SequenceRuleSource sequenceRuleSource) {
 						List<SurfaceRules.RuleSource> surfaceRules = new ArrayList<>(sequenceRuleSource.sequence());
-						surfaceRules.add(1, anySurfaceRule(ResourceKey.create(Registry.BIOME_REGISTRY, SPECTRAL_CAVERNS.getId()), CaviercavesModBlocks.CHROMASTONE.get().defaultBlockState(), CaviercavesModBlocks.CHROMASTONE.get().defaultBlockState(),
-								CaviercavesModBlocks.CHROMASTONE.get().defaultBlockState()));
+						surfaceRules.add(1, anySurfaceRule(ResourceKey.create(Registry.BIOME_REGISTRY, SPECTRAL_CAVERNS.getId()), CaviercavesModBlocks.MOON_STONE.get().defaultBlockState(), CaviercavesModBlocks.MOON_STONE.get().defaultBlockState(),
+								CaviercavesModBlocks.MOON_STONE.get().defaultBlockState()));
 						surfaceRules.add(1, anySurfaceRule(ResourceKey.create(Registry.BIOME_REGISTRY, CRYSTAL_CAVE.getId()), CaviercavesModBlocks.WHITE_MARBLE.get().defaultBlockState(), CaviercavesModBlocks.WHITE_MARBLE.get().defaultBlockState(),
 								CaviercavesModBlocks.WHITE_MARBLE.get().defaultBlockState()));
 						NoiseGeneratorSettings moddedNoiseGeneratorSettings = new NoiseGeneratorSettings(noiseGeneratorSettings.noiseSettings(), noiseGeneratorSettings.defaultBlock(), noiseGeneratorSettings.defaultFluid(),

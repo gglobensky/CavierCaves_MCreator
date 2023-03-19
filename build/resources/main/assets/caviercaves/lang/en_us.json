@@ -2,11 +2,18 @@
   "block.caviercaves.white_crystal": "Selenite Crystal",
   "biome.caviercaves.crystal_cave": "Selenite Sanctum",
   "block.caviercaves.white_marble": "White Marble",
+  "block.caviercaves.dull_moon_stone_slab": "Dull Moonstone Slab",
   "block.caviercaves.ghost_fungus_block": "Ghost Fungus Block",
-  "biome.caviercaves.spectral_caverns": "Spectral Caverns",
   "block.caviercaves.black_marble": "Black Marble",
+  "block.caviercaves.dull_moon_stone_wall": "Dull Moonstone Wall",
   "block.caviercaves.ghost_fungus": "Ghost Fungus",
+  "block.caviercaves.dull_moon_stone_pressure_plate": "Dull Moonstone Pressure Plate",
+  "itemGroup.tabcavier_caves": "Cavier Caves",
+  "block.caviercaves.dull_moon_stone": "Dull Moonstone",
+  "block.caviercaves.dull_moon_stone_button": "Dull Moonstone Pressure Plate",
+  "block.caviercaves.spectral_vine": "Spectral Vine",
+  "biome.caviercaves.spectral_caverns": "Spectral Caverns",
+  "block.caviercaves.dull_moon_stone_stairs": "Dull Moonstone Stairs",
   "block.caviercaves.ghost_fungus_stem": "Ghost Fungus Stem",
-  "block.caviercaves.chromastone": "Chromastone",
-  "itemGroup.tabcavier_caves": "Cavier Caves"
+  "block.caviercaves.moon_stone": "Moonstone"
 }

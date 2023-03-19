@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "caviercaves:block/dull_moon_stone_pressure_plate"
+    },
+    "powered=true": {
+      "model": "caviercaves:block/dull_moon_stone_pressure_plate_down"
+    }
+  }
+}

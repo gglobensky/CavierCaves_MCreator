@@ -1,0 +1,20 @@
+{
+  "_fv": 39,
+  "_type": "recipe",
+  "definition": {
+    "recipeType": "Stone cutting",
+    "xpReward": 0.0,
+    "cookingTime": 200,
+    "recipeRetstackSize": 2,
+    "group": "slabs",
+    "recipeShapeless": false,
+    "stoneCuttingInputStack": {
+      "value": "CUSTOM:DullMoonStone"
+    },
+    "stoneCuttingReturnStack": {
+      "value": "CUSTOM:DullMoonStoneSlab"
+    },
+    "name": "dull_moon_stone_slab_stone_cutter",
+    "namespace": "mod"
+  }
+}

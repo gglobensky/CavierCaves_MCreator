@@ -1,0 +1,7 @@
+{
+  "parent": "block/button_pressed",
+  "textures": {
+    "texture": "caviercaves:blocks/chromastone"
+  },
+  "render_type": "solid"
+}

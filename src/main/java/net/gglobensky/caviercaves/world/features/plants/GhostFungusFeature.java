@@ -20,7 +20,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.core.Holder;
 
-import net.gglobensky.caviercaves.procedures.CanGhostFungusGrowProcedure;
+import net.gglobensky.caviercaves.procedures.IsUndergroundProcedure;
 import net.gglobensky.caviercaves.init.CaviercavesModBlocks;
 
 import java.util.Set;
@@ -35,7 +35,7 @@ public class GhostFungusFeature extends RandomPatchFeature {
 		FEATURE = new GhostFungusFeature();
 		CONFIGURED_FEATURE = FeatureUtils.register("caviercaves:ghost_fungus", FEATURE,
 				FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CaviercavesModBlocks.GHOST_FUNGUS.get())), List.of(), 2));
-		PLACED_FEATURE = PlacementUtils.register("caviercaves:ghost_fungus", CONFIGURED_FEATURE, List.of(CountPlacement.of(2), RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome()));
+		PLACED_FEATURE = PlacementUtils.register("caviercaves:ghost_fungus", CONFIGURED_FEATURE, List.of(CountPlacement.of(0), RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
 		return FEATURE;
 	}
 
@@ -52,7 +52,7 @@ public class GhostFungusFeature extends RandomPatchFeature {
 		int x = context.origin().getX();
 		int y = context.origin().getY();
 		int z = context.origin().getZ();
-		if (!CanGhostFungusGrowProcedure.execute(world, x, y, z))
+		if (!IsUndergroundProcedure.execute(world, x, y, z))
 			return false;
 		return super.place(context);
 	}

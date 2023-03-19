@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "caviercaves:spectral_caverns",
-  "features": "caviercaves:chromastone",
-  "step": "underground_ores"
-}

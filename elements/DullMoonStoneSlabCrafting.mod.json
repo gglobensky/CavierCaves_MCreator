@@ -1,0 +1,46 @@
+{
+  "_fv": 39,
+  "_type": "recipe",
+  "definition": {
+    "recipeType": "Crafting",
+    "xpReward": 0.0,
+    "cookingTime": 200,
+    "recipeRetstackSize": 4,
+    "group": "slabs",
+    "recipeShapeless": false,
+    "recipeSlots": [
+      {
+        "value": ""
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": "CUSTOM:DullMoonStone"
+      },
+      {
+        "value": "CUSTOM:DullMoonStone"
+      },
+      {
+        "value": "CUSTOM:DullMoonStone"
+      }
+    ],
+    "recipeReturnStack": {
+      "value": "CUSTOM:DullMoonStoneSlab"
+    },
+    "name": "dull_moon_stone_slab_crafting",
+    "namespace": "mod"
+  }
+}

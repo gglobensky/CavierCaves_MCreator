@@ -1,0 +1,33 @@
+{
+  "group": "stairs",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0  ",
+    "34 ",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "caviercaves:dull_moon_stone"
+    },
+    "3": {
+      "item": "caviercaves:dull_moon_stone"
+    },
+    "4": {
+      "item": "caviercaves:dull_moon_stone"
+    },
+    "6": {
+      "item": "caviercaves:dull_moon_stone"
+    },
+    "7": {
+      "item": "caviercaves:dull_moon_stone"
+    },
+    "8": {
+      "item": "caviercaves:dull_moon_stone"
+    }
+  },
+  "result": {
+    "item": "caviercaves:dull_moon_stone_stairs",
+    "count": 4
+  }
+}

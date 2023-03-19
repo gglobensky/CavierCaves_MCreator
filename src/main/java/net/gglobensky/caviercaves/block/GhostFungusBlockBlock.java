@@ -49,7 +49,7 @@ public class GhostFungusBlockBlock extends Block {
 	@Override
 	public void neighborChanged(BlockState blockstate, Level world, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean moving) {
 		super.neighborChanged(blockstate, world, pos, neighborBlock, fromPos, moving);
-		OnNeighbourChangedBlockstateManagerProcedure.ShowInsideFace(blockstate, world, pos, fromPos);
+		OnNeighbourChangedBlockstateManagerProcedure.ShowInsideFace(blockstate, world, pos, fromPos, neighborBlock);
 	}
 	
 	@Override

@@ -1,0 +1,46 @@
+{
+  "_fv": 39,
+  "_type": "recipe",
+  "definition": {
+    "recipeType": "Crafting",
+    "xpReward": 0.0,
+    "cookingTime": 200,
+    "recipeRetstackSize": 1,
+    "group": "walls",
+    "recipeShapeless": false,
+    "recipeSlots": [
+      {
+        "value": ""
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": ""
+      },
+      {
+        "value": "CUSTOM:DullMoonStone"
+      },
+      {
+        "value": "CUSTOM:DullMoonStone"
+      },
+      {
+        "value": "CUSTOM:DullMoonStone"
+      },
+      {
+        "value": "CUSTOM:DullMoonStone"
+      },
+      {
+        "value": "CUSTOM:DullMoonStone"
+      },
+      {
+        "value": "CUSTOM:DullMoonStone"
+      }
+    ],
+    "recipeReturnStack": {
+      "value": "CUSTOM:DullMoonStoneWall"
+    },
+    "name": "dull_moon_stone_wall_crafting",
+    "namespace": "mod"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "caviercaves:dull_moon_stone"
+  },
+  "result": "caviercaves:dull_moon_stone_stairs"
+}

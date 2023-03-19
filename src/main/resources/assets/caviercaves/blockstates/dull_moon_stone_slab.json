@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "caviercaves:block/dull_moon_stone_slab"
+    },
+    "type=top": {
+      "model": "caviercaves:block/dull_moon_stone_slab_top"
+    },
+    "type=double": {
+      "model": "caviercaves:block/dull_moon_stone_slab_full"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "group": "walls",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345"
+  ],
+  "key": {
+    "0": {
+      "item": "caviercaves:dull_moon_stone"
+    },
+    "1": {
+      "item": "caviercaves:dull_moon_stone"
+    },
+    "2": {
+      "item": "caviercaves:dull_moon_stone"
+    },
+    "3": {
+      "item": "caviercaves:dull_moon_stone"
+    },
+    "4": {
+      "item": "caviercaves:dull_moon_stone"
+    },
+    "5": {
+      "item": "caviercaves:dull_moon_stone"
+    }
+  },
+  "result": {
+    "item": "caviercaves:dull_moon_stone_wall",
+    "count": 1
+  }
+}

@@ -1,6 +1,11 @@
 Bugfixes:
 Correct bug where crystals generate on crystals
 muhsrooms get inside shown if water is next to it
+shrooms that increase by increments of 2 can have a floating block if second last block is a corner ignored and last is not ignored
+thick trunks are still misaligned sometimes (sometimes odd numbered but why tho?)
+Dull MoonStone Walls dont connect to each other
+Make sure shrooms dont show through dirt
+
 
 Features:
 Add fallen selenite crystals?
@@ -25,3 +30,30 @@ Add Biome Fossil Forest with
 
 A biome that would fit well in tight spaces
 Make ghost fungus bonemealable
+
+Biome with multicolored streaks of marble
+
+
+Cracks with magma blocks, lava and maybe geysers
+
+Spectral Water: This is a special type of water that glows in the dark. It can be found in underground lakes and pools throughout the biome. Players can use it to create unique lighting effects or as a source of renewable glowstone.
+
+Mushroom Spores: These are floating particles that can be found in the air throughout the biome. They can be collected with a special tool (e.g. a spore collector) and used to grow giant mushrooms outside of the Spectral Caverns biome.
+
+
+Black - RGB (25, 25, 25)
+Red - RGB (194, 37, 28)
+Green - RGB (61, 174, 61)
+Brown - RGB (102, 78, 51)
+Blue - RGB (43, 46, 142)
+Purple - RGB (128, 23, 156)
+Cyan - RGB (37, 143, 141)
+Light Gray - RGB (153, 153, 153)
+Gray - RGB (77, 77, 77)
+Pink - RGB (242, 127, 165)
+Lime - RGB (127, 204, 25)
+Yellow - RGB (255, 255, 85)
+Light Blue - RGB (127, 178, 201)
+Magenta - RGB (199, 78, 189)
+Orange - RGB (255, 127, 39)
+White - RGB (255, 255, 255)

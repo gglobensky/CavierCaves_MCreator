@@ -2,7 +2,7 @@ Java Launcher: C:\Program Files\Pylo\MCreator\jdk\bin\java.exe
 Arguments: '--in-jar, C:\Users\Guillaume Globensky\MCreatorWorkspaces\caviercaves\build\libs\modid-1.0.jar, --out-jar, C:\Users\Guillaume Globensky\MCreatorWorkspaces\caviercaves\build\reobfJar\output.jar, --srg-in, C:\Users\Guillaume Globensky\MCreatorWorkspaces\caviercaves\build\createMcpToSrg\output.tsrg, --live'
 Classpath:
  - C:\Users\Guillaume Globensky\.mcreator\gradle\caches\forge_gradle\maven_downloader\net\md-5\SpecialSource\1.11.0\SpecialSource-1.11.0-shaded.jar
- - C:\Users\Guillaume Globensky\MCreatorWorkspaces\caviercaves\build\fg_cache\net\minecraftforge\forge\1.19.2-43.2.0_mapped_official_1.19.2\forge-1.19.2-43.2.0_mapped_official_1.19.2.jar
+ - C:\Users\Guillaume Globensky\MCreatorWorkspaces\caviercaves\build\fg_cache\net\minecraftforge\forge\1.19.2-43.2.0_mapped_official_1.19.2\forge-1.19.2-43.2.0_mapped_official_1.19.2-recomp.jar
  - C:\Users\Guillaume Globensky\.mcreator\gradle\caches\forge_gradle\minecraft_repo\versions\1.19.2\client-extra.jar
  - C:\Users\Guillaume Globensky\.mcreator\gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlloader\1.19.2-43.2.0\3e6e8b7b5e1dbc6ee01a20f74675f223b64c7847\fmlloader-1.19.2-43.2.0.jar
  - C:\Users\Guillaume Globensky\.mcreator\gradle\caches\modules-2\files-2.1\net.minecraftforge\JarJarSelector\0.3.16\2a31421fb5e267249da103a644f23afb43d158af\JarJarSelector-0.3.16.jar
@@ -120,10 +120,10 @@ Loading mappings... 40%
 Loading mappings... 50%
 0 packages, 6859 classes, 30693 fields, 57911 methods
 Remapping final jar
-Remapping jar...  1%
+Remapping jar...  0%
 Remapping jar... 10%
 Remapping jar... 20%
-Remapping jar... 31%
+Remapping jar... 30%
 Remapping jar... 40%
 Remapping jar... 50%
 Remapping jar... 60%

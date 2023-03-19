@@ -1,0 +1,13 @@
+{
+  "group": "button",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "caviercaves:dull_moon_stone"
+    }
+  ],
+  "result": {
+    "item": "caviercaves:dull_moon_stone_button",
+    "count": 1
+  }
+}

@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "caviercaves:spectral_caverns",
-  "features": "caviercaves:giant_ghost_fungus_feature_bk",
-  "step": "underground_structures"
-}

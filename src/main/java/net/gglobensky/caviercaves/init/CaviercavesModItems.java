@@ -23,7 +23,14 @@ public class CaviercavesModItems {
 	public static final RegistryObject<Item> BLACK_MARBLE = block(CaviercavesModBlocks.BLACK_MARBLE, CaviercavesModTabs.TAB_CAVIER_CAVES);
 	public static final RegistryObject<Item> GHOST_FUNGUS_STEM = block(CaviercavesModBlocks.GHOST_FUNGUS_STEM, CaviercavesModTabs.TAB_CAVIER_CAVES);
 	public static final RegistryObject<Item> GHOST_FUNGUS_BLOCK = block(CaviercavesModBlocks.GHOST_FUNGUS_BLOCK, CaviercavesModTabs.TAB_CAVIER_CAVES);
-	public static final RegistryObject<Item> CHROMASTONE = block(CaviercavesModBlocks.CHROMASTONE, CaviercavesModTabs.TAB_CAVIER_CAVES);
+	public static final RegistryObject<Item> MOON_STONE = block(CaviercavesModBlocks.MOON_STONE, CaviercavesModTabs.TAB_CAVIER_CAVES);
+	public static final RegistryObject<Item> SPECTRAL_VINE = block(CaviercavesModBlocks.SPECTRAL_VINE, CaviercavesModTabs.TAB_CAVIER_CAVES);
+	public static final RegistryObject<Item> DULL_MOON_STONE = block(CaviercavesModBlocks.DULL_MOON_STONE, CaviercavesModTabs.TAB_CAVIER_CAVES);
+	public static final RegistryObject<Item> DULL_MOON_STONE_STAIRS = block(CaviercavesModBlocks.DULL_MOON_STONE_STAIRS, CaviercavesModTabs.TAB_CAVIER_CAVES);
+	public static final RegistryObject<Item> DULL_MOON_STONE_SLAB = block(CaviercavesModBlocks.DULL_MOON_STONE_SLAB, CaviercavesModTabs.TAB_CAVIER_CAVES);
+	public static final RegistryObject<Item> DULL_MOON_STONE_WALL = block(CaviercavesModBlocks.DULL_MOON_STONE_WALL, CaviercavesModTabs.TAB_CAVIER_CAVES);
+	public static final RegistryObject<Item> DULL_MOON_STONE_BUTTON = block(CaviercavesModBlocks.DULL_MOON_STONE_BUTTON, CaviercavesModTabs.TAB_CAVIER_CAVES);
+	public static final RegistryObject<Item> DULL_MOON_STONE_PRESSURE_PLATE = block(CaviercavesModBlocks.DULL_MOON_STONE_PRESSURE_PLATE, CaviercavesModTabs.TAB_CAVIER_CAVES);
 
 	private static RegistryObject<Item> block(RegistryObject<Block> block, CreativeModeTab tab) {
 		return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));

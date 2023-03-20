@@ -1,8 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": {
-    "type": "forge:any"
-  },
+  "biomes": "caviercaves:crystal_cave",
   "features": "caviercaves:white_marble",
   "step": "underground_ores"
 }

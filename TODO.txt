@@ -1,11 +1,10 @@
 Bugfixes:
-Correct bug where crystals generate on crystals
-muhsrooms get inside shown if water is next to it
 shrooms that increase by increments of 2 can have a floating block if second last block is a corner ignored and last is not ignored
 thick trunks are still misaligned sometimes (sometimes odd numbered but why tho?)
-Dull MoonStone Walls dont connect to each other
 Make sure shrooms dont show through dirt
 
+
+Pass y value to the next check for surface?
 
 Features:
 Add fallen selenite crystals?

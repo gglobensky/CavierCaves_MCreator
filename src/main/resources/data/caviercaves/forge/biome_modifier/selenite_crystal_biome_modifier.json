@@ -1,8 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": {
-    "type": "forge:any"
-  },
+  "biomes": "caviercaves:crystal_cave",
   "features": "caviercaves:selenite_crystal",
-  "step": "surface_structures"
+  "step": "underground_structures"
 }

@@ -23,7 +23,7 @@ import java.util.List;
 
 public class SpectralCavernsBiome {
 	public static final List<Climate.ParameterPoint> UNDERGROUND_PARAMETER_POINTS = List.of(new Climate.ParameterPoint(Climate.Parameter.span(-0.5f, 0.5f), Climate.Parameter.span(-0.5f, 0.5f), Climate.Parameter.span(0.3f, 1f),
-			Climate.Parameter.span(-0.5f, 0.5f), Climate.Parameter.span(0.2f, 0.9f), Climate.Parameter.span(-1f, -0.5f), 0));
+			Climate.Parameter.span(-0.5f, 0.5f), Climate.Parameter.span(0.2f, 0.9f), Climate.Parameter.span(-1f, -0.75f), 0));
 
 	public static Biome createBiome() {
 		BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(12638463).waterColor(4159204).waterFogColor(329011).skyColor(7972607).foliageColorOverride(10387789).grassColorOverride(9470285)

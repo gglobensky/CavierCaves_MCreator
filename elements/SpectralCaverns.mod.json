@@ -53,7 +53,7 @@
     },
     "genWeirdness": {
       "min": -1.0,
-      "max": -0.5
+      "max": -0.75
     },
     "grassPerChunk": 0,
     "seagrassPerChunk": 0,

@@ -2,8 +2,12 @@
 package net.gglobensky.caviercaves.world.features;
 
 import net.gglobensky.caviercaves.featureManagers.CrystalManager;
+import net.gglobensky.caviercaves.init.CaviercavesModBiomes;
 import net.gglobensky.caviercaves.procedures.Utils;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -17,6 +21,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.core.Holder;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
 import java.util.List;
@@ -34,6 +39,7 @@ public class SeleniteCrystalFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	private final Set<ResourceKey<Level>> generate_dimensions = Set.of(Level.OVERWORLD);
+	//private final Set<ResourceLocation> generate_biomes = Set.of(new ResourceLocation("caviercaves:crystal_cave"));
 	private StructureTemplate template = null;
 
 	public SeleniteCrystalFeature() {
@@ -52,6 +58,9 @@ public class SeleniteCrystalFeature extends Feature<NoneFeatureConfiguration> {
 		y = Utils.randomRange(8 + context.level().getMinBuildHeight(), Math.max(y, 9 + context.level().getMinBuildHeight()));
 
 		WorldGenLevel world = context.level();
+
+		/*if (!generate_biomes.contains(world.getBiome(new BlockPos(x, y, z))))
+			return false;*/
 
 		CrystalManager.createCrystals(world, x, y, z);
 		CrystalManager.createLargeCrystals(world, x, y, z);

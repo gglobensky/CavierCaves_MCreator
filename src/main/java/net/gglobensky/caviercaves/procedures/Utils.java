@@ -1,5 +1,7 @@
 package net.gglobensky.caviercaves.procedures;
 
+import net.gglobensky.caviercaves.enums.Orientation;
+import net.gglobensky.caviercaves.featureManagers.CrystalManager;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -7,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.LiquidBlock;
 
 import java.util.Random;
 
@@ -17,7 +20,8 @@ public class Utils {
 
 	public static Double getFloorYLevel(LevelAccessor world, double x, double y, double z){
 		Double surfaceYLevel = null;
-		boolean hasStartedInNonSolid = IsAirOrFluidProcedure.execute(world, x, y, z);
+		boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
+		boolean hasPassedStoneBlock = false;
 		
 		for (int j = 1; j < 50; j++) {
 			if (hasStartedInNonSolid) {
@@ -27,10 +31,12 @@ public class Utils {
 				}
 			} else {
 				surfaceYLevel = y + j;
-				if (IsAirOrFluidProcedure.execute(world, x, surfaceYLevel, z) && (world.getBlockState(new BlockPos(x, surfaceYLevel - 1, z))).is(stoneTag)) {
+				if (hasPassedStoneBlock && isAirOrFluid(world, x, surfaceYLevel, z) && (world.getBlockState(new BlockPos(x, surfaceYLevel - 1, z))).is(stoneTag)) {
 					surfaceYLevel = surfaceYLevel - 1;
 					return surfaceYLevel;
 				}
+
+				hasPassedStoneBlock = (world.getBlockState(new BlockPos(x, surfaceYLevel, z))).is(stoneTag);
 			}
 		}
 		
@@ -39,7 +45,8 @@ public class Utils {
 
 	public static Double getCeilingYLevel(LevelAccessor world, double x, double y, double z){
 		Double surfaceYLevel = null;
-		boolean hasStartedInNonSolid = IsAirOrFluidProcedure.execute(world, x, y, z);
+		boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
+		boolean hasPassedStoneBlock = false;
 		
 		for (int j = 1; j < 50; j++) {
 			if (hasStartedInNonSolid) {
@@ -50,9 +57,11 @@ public class Utils {
 				}
 			} else {
 				surfaceYLevel = y - j;
-				if (IsAirOrFluidProcedure.execute(world, x, surfaceYLevel, z) && (world.getBlockState(new BlockPos(x, surfaceYLevel + 1, z))).is(stoneTag)) {
+				if (hasPassedStoneBlock && isAirOrFluid(world, x, surfaceYLevel, z) && (world.getBlockState(new BlockPos(x, surfaceYLevel + 1, z))).is(stoneTag)) {
 					return surfaceYLevel;
 				}
+
+				hasPassedStoneBlock = (world.getBlockState(new BlockPos(x, surfaceYLevel, z))).is(stoneTag);
 			}
 		}
 		
@@ -61,7 +70,8 @@ public class Utils {
 
 	public static Double getNorthWallZValue(LevelAccessor world, double x, double y, double z){
 	    Double surfaceZValue = null;
-	    boolean hasStartedInNonSolid = IsAirOrFluidProcedure.execute(world, x, y, z);
+	    boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
+		boolean hasPassedStoneBlock = false;
 	    
 	    for (int j = 1; j < 50; j++) {
 	        if (hasStartedInNonSolid) {
@@ -72,9 +82,11 @@ public class Utils {
 	            }
 	        } else {
 	            surfaceZValue = z - j;
-	            if (IsAirOrFluidProcedure.execute(world, x, y, surfaceZValue) && (world.getBlockState(new BlockPos(x, y, surfaceZValue + 1))).is(stoneTag)) {
+	            if (hasPassedStoneBlock && isAirOrFluid(world, x, y, surfaceZValue) && (world.getBlockState(new BlockPos(x, y, surfaceZValue + 1))).is(stoneTag)) {
 	                return surfaceZValue;
 	            }
+
+				hasPassedStoneBlock = (world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag);
 	        }
 	    }
 	    
@@ -83,20 +95,23 @@ public class Utils {
 
 	public static Double getSouthWallZValue(LevelAccessor world, double x, double y, double z){
 	    Double surfaceZValue = null;
-	    boolean hasStartedInNonSolid = IsAirOrFluidProcedure.execute(world, x, y, z);
+	    boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
+		boolean hasPassedStoneBlock = false;
 	    
 	    for (int j = 1; j < 50; j++) {
 	        if (hasStartedInNonSolid) {
 	            surfaceZValue = z - j;
-	            if ((world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag)) {
+	            if (hasPassedStoneBlock && (world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag)) {
 	                surfaceZValue = surfaceZValue + 1;
 	                return surfaceZValue;
 	            }
 	        } else {
 	            surfaceZValue = z + j;
-	            if (IsAirOrFluidProcedure.execute(world, x, y, surfaceZValue) && (world.getBlockState(new BlockPos(x, y, surfaceZValue - 1))).is(stoneTag)) {
+	            if (isAirOrFluid(world, x, y, surfaceZValue) && (world.getBlockState(new BlockPos(x, y, surfaceZValue - 1))).is(stoneTag)) {
 	                return surfaceZValue;
 	            }
+
+				hasPassedStoneBlock = (world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag);
 	        }
 	    }
 	    
@@ -105,7 +120,8 @@ public class Utils {
 
 	public static Double getWestWallXValue(LevelAccessor world, double x, double y, double z){
 	    Double surfaceXValue = null;
-	    boolean hasStartedInNonSolid = IsAirOrFluidProcedure.execute(world, x, y, z);
+	    boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
+		boolean hasPassedStoneBlock = false;
 	    
 	    for (int j = 1; j < 50; j++) {
 	        if (hasStartedInNonSolid) {
@@ -116,9 +132,11 @@ public class Utils {
 	            }
 	        } else {
 	            surfaceXValue = x + j;
-	            if (IsAirOrFluidProcedure.execute(world, surfaceXValue, y, z) && (world.getBlockState(new BlockPos(surfaceXValue - 1, y, z))).is(stoneTag)) {
+	            if (hasPassedStoneBlock && isAirOrFluid(world, surfaceXValue, y, z) && (world.getBlockState(new BlockPos(surfaceXValue - 1, y, z))).is(stoneTag)) {
 	                return surfaceXValue;
 	            }
+
+				hasPassedStoneBlock = (world.getBlockState(new BlockPos(surfaceXValue, y, z))).is(stoneTag);
 	        }
 	    }
 	    
@@ -127,7 +145,8 @@ public class Utils {
 
 	public static Double getEastWallXValue(LevelAccessor world, double x, double y, double z){
 	    Double surfaceXValue = null;
-	    boolean hasStartedInNonSolid = IsAirOrFluidProcedure.execute(world, x, y, z);
+	    boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
+		boolean hasPassedStoneBlock = false;
 	    
 	    for (int j = 1; j < 50; j++) {
 	        if (hasStartedInNonSolid) {
@@ -138,9 +157,11 @@ public class Utils {
 	            }
 	        } else {
 	            surfaceXValue = x - j;
-	            if (IsAirOrFluidProcedure.execute(world, surfaceXValue, y, z) & (world.getBlockState(new BlockPos(surfaceXValue + 1, y, z))).is(stoneTag)) {
+	            if (hasPassedStoneBlock && isAirOrFluid(world, surfaceXValue, y, z) & (world.getBlockState(new BlockPos(surfaceXValue + 1, y, z))).is(stoneTag)) {
 	                return surfaceXValue;
 	            }
+
+				hasPassedStoneBlock = (world.getBlockState(new BlockPos(surfaceXValue, y, z))).is(stoneTag);
 	        }
 	    }
 	    
@@ -149,7 +170,7 @@ public class Utils {
 
 	public static int getYSpace(LevelAccessor world, double x, double y, double z, int maxScan){
 		for (int i = 1; i < maxScan; i++){
-			if (!IsAirOrFluidProcedure.execute(world, x, y + i, z)){
+			if (!isAirOrFluid(world, x, y + i, z)){
 				return i;
 			}
 		}
@@ -158,10 +179,18 @@ public class Utils {
 	}
 
 	public static int randomRange(int min, int max){
+		if (min == max)
+			return max;
+
 		return min + random.nextInt(max - min);
 	}
 
 	public static boolean isUnderground(LevelAccessor world, double x, double y, double z) {
 		return !world.canSeeSkyFromBelowWater(new BlockPos(x, y, z));
 	}
+
+	public static boolean isAirOrFluid(LevelAccessor world, double x, double y, double z) {
+		return world.isEmptyBlock(new BlockPos(x, y, z)) || (world.getBlockState(new BlockPos(x, y, z))).getBlock() instanceof LiquidBlock;
+	}
+
 }

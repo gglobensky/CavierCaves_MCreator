@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "caviercaves:blocks/petrified_oak_top",
+    "up": "caviercaves:blocks/petrified_oak_top",
+    "north": "caviercaves:blocks/petrified_oak",
+    "east": "caviercaves:blocks/petrified_oak",
+    "south": "caviercaves:blocks/petrified_oak",
+    "west": "caviercaves:blocks/petrified_oak",
+    "particle": "caviercaves:blocks/petrified_oak_top"
+  },
+  "render_type": "solid"
+}

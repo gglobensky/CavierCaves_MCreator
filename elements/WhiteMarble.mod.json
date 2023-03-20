@@ -120,7 +120,11 @@
     "spawnWorldTypes": [
       "Surface"
     ],
-    "restrictionBiomes": [],
+    "restrictionBiomes": [
+      {
+        "value": "CUSTOM:CrystalCave"
+      }
+    ],
     "blocksToReplace": [
       {
         "value": "Blocks.STONE"

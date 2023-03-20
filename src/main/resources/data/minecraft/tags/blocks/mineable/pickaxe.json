@@ -3,6 +3,17 @@
   "values": [
     "caviercaves:white_marble",
     "caviercaves:white_crystal",
-    "caviercaves:black_marble"
+    "caviercaves:black_marble",
+    "caviercaves:red_crystal",
+    "caviercaves:black_crystal",
+    "caviercaves:green_crystal",
+    "caviercaves:blue_crystal",
+    "caviercaves:purple_crystal",
+    "caviercaves:pink_crystal",
+    "caviercaves:yellow_crystal",
+    "caviercaves:orange_crystal",
+    "caviercaves:green_marble",
+    "caviercaves:red_marble",
+    "caviercaves:rhyolite"
   ]
 }

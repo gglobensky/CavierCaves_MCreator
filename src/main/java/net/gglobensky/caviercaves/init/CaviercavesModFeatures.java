@@ -11,12 +11,15 @@ import net.minecraftforge.fml.common.Mod;
 
 import net.minecraft.world.level.levelgen.feature.Feature;
 
+import net.gglobensky.caviercaves.world.features.plants.PurpuraCapFeature;
 import net.gglobensky.caviercaves.world.features.plants.GhostFungusFeature;
 import net.gglobensky.caviercaves.world.features.ores.WhiteMarbleFeature;
+import net.gglobensky.caviercaves.world.features.ores.RhyoliteFeature;
 import net.gglobensky.caviercaves.world.features.ores.MoonStoneFeature;
 import net.gglobensky.caviercaves.world.features.ores.BlackMarbleFeature;
 import net.gglobensky.caviercaves.world.features.SpectralVinesFeature;
 import net.gglobensky.caviercaves.world.features.SeleniteCrystalFeature;
+import net.gglobensky.caviercaves.world.features.PurpuraCapFeatureFeature;
 import net.gglobensky.caviercaves.world.features.GiantGhostFungusFeature;
 import net.gglobensky.caviercaves.world.features.GhostFungusSpectralBiomeFeature;
 import net.gglobensky.caviercaves.world.features.GhostFungusFeatureFeature;
@@ -34,4 +37,7 @@ public class CaviercavesModFeatures {
 	public static final RegistryObject<Feature<?>> MOON_STONE = REGISTRY.register("moon_stone", MoonStoneFeature::feature);
 	public static final RegistryObject<Feature<?>> SPECTRAL_VINES = REGISTRY.register("spectral_vines", SpectralVinesFeature::feature);
 	public static final RegistryObject<Feature<?>> SELENITE_CRYSTAL = REGISTRY.register("selenite_crystal", SeleniteCrystalFeature::feature);
+	public static final RegistryObject<Feature<?>> PURPURA_CAP = REGISTRY.register("purpura_cap", PurpuraCapFeature::feature);
+	public static final RegistryObject<Feature<?>> PURPURA_CAP_FEATURE = REGISTRY.register("purpura_cap_feature", PurpuraCapFeatureFeature::new);
+	public static final RegistryObject<Feature<?>> RHYOLITE = REGISTRY.register("rhyolite", RhyoliteFeature::feature);
 }

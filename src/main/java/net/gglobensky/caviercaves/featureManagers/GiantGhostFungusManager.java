@@ -1,5 +1,6 @@
 package net.gglobensky.caviercaves.featureManagers;
 
+import net.gglobensky.caviercaves.enums.Orientation;
 import net.gglobensky.caviercaves.procedures.Utils;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.resources.ResourceLocation;
@@ -49,19 +50,23 @@ public class GiantGhostFungusManager {
             if (surfaceYLevel != null && world.getBiome(new BlockPos(x + xOffset, surfaceYLevel, z + zOffset)).is(new ResourceLocation("caviercaves:spectral_caverns"))) {
                 if (mushroomHeight < 4){
                     BlockPos capStart = createSmallTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    createSmallCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+                    GiantPurpuraCapManager.createHorn(world, capStart.getX(), capStart.getY(), capStart.getZ(), Orientation.UP);
+                    //createSmallCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else if (mushroomHeight < 8){
                     BlockPos capStart = createNormalTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    createNormalCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+                    GiantPurpuraCapManager.createHorn(world, capStart.getX(), capStart.getY(), capStart.getZ(), Orientation.UP);
+                    //createNormalCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else if (mushroomHeight < 12){
                     BlockPos capStart = createLongTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    createLargeCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+                    GiantPurpuraCapManager.createHorn(world, capStart.getX(), capStart.getY(), capStart.getZ(), Orientation.UP);
+                    //createLargeCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else{
                     BlockPos capStart = createThickTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    createThickCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+                    GiantPurpuraCapManager.createHorn(world, capStart.getX(), capStart.getY(), capStart.getZ(), Orientation.UP);
+                    //createThickCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
             }
 
@@ -276,4 +281,5 @@ public class GiantGhostFungusManager {
             }
         }
     }
+
 }

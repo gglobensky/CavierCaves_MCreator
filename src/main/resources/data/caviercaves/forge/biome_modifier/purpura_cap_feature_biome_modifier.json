@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "caviercaves:spectral_caverns",
+  "features": "caviercaves:purpura_cap_feature",
+  "step": "underground_decoration"
+}

@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "caviercaves:ghost_fungus_stem",
-    "caviercaves:ghost_fungus_block"
+    "caviercaves:ghost_fungus_block",
+    "caviercaves:purpura_cap_block"
   ]
 }

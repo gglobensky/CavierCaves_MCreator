@@ -17,6 +17,7 @@ import net.gglobensky.caviercaves.block.SpectralVineBlock;
 import net.gglobensky.caviercaves.block.RhyoliteBlock;
 import net.gglobensky.caviercaves.block.RedMarbleBlock;
 import net.gglobensky.caviercaves.block.RedCrystalBlock;
+import net.gglobensky.caviercaves.block.PurpuraCapBlockBlock;
 import net.gglobensky.caviercaves.block.PurpuraCapBlock;
 import net.gglobensky.caviercaves.block.PurpleCrystalBlock;
 import net.gglobensky.caviercaves.block.PinkCrystalBlock;
@@ -68,4 +69,5 @@ public class CaviercavesModBlocks {
 	public static final RegistryObject<Block> RED_MARBLE = REGISTRY.register("red_marble", () -> new RedMarbleBlock());
 	public static final RegistryObject<Block> RHYOLITE = REGISTRY.register("rhyolite", () -> new RhyoliteBlock());
 	public static final RegistryObject<Block> PETRIFIED_OAK_LOG = REGISTRY.register("petrified_oak_log", () -> new PetrifiedOakLogBlock());
+	public static final RegistryObject<Block> PURPURA_CAP_BLOCK = REGISTRY.register("purpura_cap_block", () -> new PurpuraCapBlockBlock());
 }

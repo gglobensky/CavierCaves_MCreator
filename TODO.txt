@@ -3,6 +3,7 @@ shrooms that increase by increments of 2 can have a floating block if second las
 thick trunks are still misaligned sometimes (sometimes odd numbered but why tho?)
 Make sure shrooms dont show through dirt
 
+Upside down mushroom forest 
 
 Pass y value to the next check for surface?
 

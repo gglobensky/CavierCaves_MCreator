@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "caviercaves:block/purpura_cap_block"
+  }
+}

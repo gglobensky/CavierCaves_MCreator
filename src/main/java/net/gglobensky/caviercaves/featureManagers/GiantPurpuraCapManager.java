@@ -14,16 +14,16 @@ public class GiantPurpuraCapManager {
 
     private static Orientation[] orientations = { Orientation.NORTH, Orientation.SOUTH, Orientation.EAST, Orientation.WEST };
     public static void createHorn(LevelAccessor world, double x, double y, double z, Orientation direction){
-        int hornStartingRadius = 4;
-        int maxHornLength = 8;
+        int hornStartingRadius = 1;
+        int maxHornLength = 2;
 
         int minShrinkRate = 1;
         int maxShrinkRate = 1;
         float shrinkChance = 1;
 
         int minCurvatureRate = 1;
-        int maxCurvatureRate = 3;
-        float curvatureChance = 1;
+        int maxCurvatureRate = 1;
+        float curvatureChance = 0;
         float curvatureRandomness = 0;
 
         Orientation curvatureDirection = null;
@@ -31,15 +31,15 @@ public class GiantPurpuraCapManager {
         int currentRadius = hornStartingRadius;
         int currentHornLength = 0;
 
-        while (currentRadius > 0 && currentHornLength++ < maxHornLength){
-            BlockDrawing.drawCircle(x, y, z, currentRadius, direction, pos -> {
+        while (currentHornLength++ < maxHornLength){
+            BlockDrawing.drawCirclePerimeter(x, y, z, currentRadius, direction, pos -> {
                 world.setBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), Blocks.GLOWSTONE.defaultBlockState(), 3);
             });
 
-            if (Math.random() < shrinkChance)
-                currentRadius -= Utils.randomRange(minShrinkRate, maxShrinkRate);
+            if (shrinkChance == 1 || (shrinkChance != 0 && Math.random() < shrinkChance))
+                currentRadius += Utils.randomRange(minShrinkRate, maxShrinkRate);
 
-            if (Math.random() < curvatureChance){
+            if (curvatureChance == 1 || (curvatureChance != 0 && Math.random() < curvatureChance)){
                 if (curvatureDirection == null || Math.random() < curvatureRandomness){
                     curvatureDirection = BlockDrawing.getRelativeOrientation(direction, orientations[Utils.randomRange(0, 4)]);
 

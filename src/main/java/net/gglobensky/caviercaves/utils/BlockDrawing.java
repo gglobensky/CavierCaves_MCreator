@@ -79,33 +79,33 @@ public class BlockDrawing {
                 default: yield absoluteDirection;
             };
             case WEST: yield switch (absoluteDirection){
-                case UP: yield Orientation.NORTH;
-                case DOWN: yield Orientation.SOUTH;
-                case WEST: yield Orientation.DOWN;
-                case EAST: yield Orientation.UP;
-                case NORTH: yield Orientation.EAST;
-                case SOUTH: yield Orientation.WEST;
+                case UP: yield Orientation.EAST;
+                case DOWN: yield Orientation.WEST;
+                case WEST: yield Orientation.NORTH;
+                case EAST: yield Orientation.SOUTH;
+                case NORTH: yield Orientation.UP;
+                case SOUTH: yield Orientation.DOWN;
             };
             case EAST: yield switch (absoluteDirection){
-                case UP: yield Orientation.SOUTH;
-                case DOWN: yield Orientation.NORTH;
-                case WEST: yield Orientation.UP;
-                case EAST: yield Orientation.DOWN;
-                case NORTH: yield Orientation.EAST;
-                case SOUTH: yield Orientation.WEST;
-            };
-            case NORTH: yield switch (absoluteDirection){
-                case UP: yield Orientation.NORTH;
-                case DOWN: yield Orientation.SOUTH;
+                case UP: yield Orientation.WEST;
+                case DOWN: yield Orientation.EAST;
+                case WEST: yield Orientation.SOUTH;
+                case EAST: yield Orientation.NORTH;
                 case NORTH: yield Orientation.DOWN;
                 case SOUTH: yield Orientation.UP;
-                default: yield absoluteDirection;
             };
-            case SOUTH: yield switch (absoluteDirection){
+            case NORTH: yield switch (absoluteDirection){
                 case UP: yield Orientation.SOUTH;
                 case DOWN: yield Orientation.NORTH;
                 case NORTH: yield Orientation.UP;
                 case SOUTH: yield Orientation.DOWN;
+                default: yield absoluteDirection;
+            };
+            case SOUTH: yield switch (absoluteDirection){
+                case UP: yield Orientation.NORTH;
+                case DOWN: yield Orientation.SOUTH;
+                case NORTH: yield Orientation.DOWN;
+                case SOUTH: yield Orientation.UP;
                 default: yield absoluteDirection;
             };
         };

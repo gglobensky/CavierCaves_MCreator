@@ -50,23 +50,19 @@ public class GiantGhostFungusManager {
             if (surfaceYLevel != null && world.getBiome(new BlockPos(x + xOffset, surfaceYLevel, z + zOffset)).is(new ResourceLocation("caviercaves:spectral_caverns"))) {
                 if (mushroomHeight < 4){
                     BlockPos capStart = createSmallTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    GiantPurpuraCapManager.createHorn(world, capStart.getX(), capStart.getY(), capStart.getZ(), Orientation.UP);
-                    //createSmallCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+                    createSmallCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else if (mushroomHeight < 8){
                     BlockPos capStart = createNormalTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    GiantPurpuraCapManager.createHorn(world, capStart.getX(), capStart.getY(), capStart.getZ(), Orientation.UP);
-                    //createNormalCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+                    createNormalCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else if (mushroomHeight < 12){
                     BlockPos capStart = createLongTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    GiantPurpuraCapManager.createHorn(world, capStart.getX(), capStart.getY(), capStart.getZ(), Orientation.UP);
-                    //createLargeCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+                    createLargeCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else{
                     BlockPos capStart = createThickTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    GiantPurpuraCapManager.createHorn(world, capStart.getX(), capStart.getY(), capStart.getZ(), Orientation.UP);
-                    //createThickCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+                    createThickCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
             }
 

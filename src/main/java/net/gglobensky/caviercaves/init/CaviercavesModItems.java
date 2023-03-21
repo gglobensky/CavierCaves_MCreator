@@ -44,6 +44,7 @@ public class CaviercavesModItems {
 	public static final RegistryObject<Item> RED_MARBLE = block(CaviercavesModBlocks.RED_MARBLE, CaviercavesModTabs.TAB_CAVIER_CAVES);
 	public static final RegistryObject<Item> RHYOLITE = block(CaviercavesModBlocks.RHYOLITE, CaviercavesModTabs.TAB_CAVIER_CAVES);
 	public static final RegistryObject<Item> PETRIFIED_OAK_LOG = block(CaviercavesModBlocks.PETRIFIED_OAK_LOG, CaviercavesModTabs.TAB_CAVIER_CAVES);
+	public static final RegistryObject<Item> PURPURA_CAP_BLOCK = block(CaviercavesModBlocks.PURPURA_CAP_BLOCK, CaviercavesModTabs.TAB_CAVIER_CAVES);
 
 	private static RegistryObject<Item> block(RegistryObject<Block> block, CreativeModeTab tab) {
 		return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));

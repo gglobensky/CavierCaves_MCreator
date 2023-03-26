@@ -1,13 +1,24 @@
 package net.gglobensky.caviercaves.utils;
 
 import net.gglobensky.caviercaves.enums.Orientation;
+import net.gglobensky.caviercaves.featureManagers.CrystalManager;
+import net.gglobensky.caviercaves.procedures.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.Consumer;
 
+
 public class BlockDrawing {
+
+    private static int[][] offsets = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+    /*@FunctionalInterface
+    public interface TriConsumer<BlockPos, Integer> {
+        void accept(BlockPos pos, Integer w, Integer l);
+    }*/
+/*
     //Adds width height length to an oriented position
     //This way you can add values like if it was on a regular flat plane then orient it any way
     public static BlockPos addRelativePosition(int wOffset, int lOffset, int hOffset, double x, double y, double z, Orientation orientation){
@@ -17,9 +28,9 @@ public class BlockDrawing {
             case DOWN:
                 return new BlockPos(x + wOffset, y - hOffset, z + lOffset);
             case WEST:
-                return new BlockPos(x + hOffset, y + wOffset, z + lOffset);
-            case EAST:
                 return new BlockPos(x - hOffset, y + wOffset, z + lOffset);
+            case EAST:
+                return new BlockPos(x + hOffset, y + wOffset, z + lOffset);
             case NORTH:
                 return new BlockPos(x + wOffset, y + lOffset, z - hOffset);
             case SOUTH:
@@ -27,6 +38,26 @@ public class BlockDrawing {
             default:
                 return new BlockPos(x, y, z);
         }
+    }
+*/
+    //Adds width height length to an oriented position
+    //This way you can add values like if it was on a regular flat plane then orient it any way
+    public static BlockPos localPosition(int localX, int localY, int localZ, double x, double y, double z, Orientation localUpDirection){
+        switch(localUpDirection) {
+            case UP:
+                return new BlockPos(x + localX, y + localY, z + localZ);
+            case DOWN:
+                return new BlockPos(x + localX, y - localY, z + localZ);
+            case WEST:
+                return new BlockPos(x - localY, y + localX, z + localZ);
+            case EAST:
+                return new BlockPos(x + localY, y + localX, z + localZ);
+            case NORTH:
+                return new BlockPos(x + localX, y + localZ, z - localY);
+            case SOUTH:
+                return new BlockPos(x + localX, y + localZ, z + localY);
+        }
+        return null;
     }
 
     public static void drawCircle(double centerX, double centerY, double centerZ, int radius, Orientation orientation, Consumer<BlockPos> action) {
@@ -40,7 +71,7 @@ public class BlockDrawing {
                 }
 
                 if (distanceSquared <= radiusSquared) {
-                    BlockPos pos = addRelativePosition(w, l, 0, centerX, centerY, centerZ, orientation);
+                    BlockPos pos = localPosition(w, 0, l, centerX, centerY, centerZ, orientation);
 
                     action.accept(pos);
                 }
@@ -59,7 +90,7 @@ public class BlockDrawing {
                 }
 
                 if (distanceSquared >= radiusSquared - 1) {
-                    BlockPos pos = addRelativePosition(w, l, 0, centerX, centerY, centerZ, orientation);
+                    BlockPos pos = localPosition(w, 0, l, centerX, centerY, centerZ, orientation);
 
                     action.accept(pos);
                 }
@@ -67,6 +98,106 @@ public class BlockDrawing {
         }
     }
 
+    public static void drawSquare(double x, double y, double z, int width, Orientation orientation, Consumer<BlockPos> action){
+        // calculate the lower and higher bounds for the x and y directions
+        int[] wBounds = Utils.divideByTwo(width);
+        int[] lBounds = Utils.divideByTwo(width);
+
+        // iterate over the x and z positions relative to the center position
+        for (int wOffset = -wBounds[0]; wOffset < wBounds[1]; wOffset++) {
+            for (int lOffset = -lBounds[0]; lOffset < lBounds[1]; lOffset++) {
+                BlockPos pos = localPosition(wOffset, 0, lOffset, x, y, z, orientation);
+
+                action.accept(pos);
+            }
+        }
+    }
+
+
+    public static BlockPos createTrunkStructure(LevelAccessor world, BlockPos startPoint, int width, int minHeight, int maxHeight, int minSections, int maxSections, Orientation localUp, Block block, boolean findSurface){
+        int height = Utils.randomRange(minHeight, maxHeight + 1);
+        int sections = Utils.randomRange(minSections, maxSections + 1);
+        sections = sections < height / 2? sections : 1;
+
+        int rowsPerSection = height / sections;
+        int currentRowInSection = 0;
+
+        int[] offsetDirection = offsets[Utils.randomRange(0, offsets.length)];
+        int[] currentOffset = { 0, 0 };
+
+        Orientation surfaceDirection = Utils.getOppositeDirection(startPoint.getX(), startPoint.getY(), startPoint.getZ(), localUp);
+
+        BlockPos bottomCenter;
+
+        if (findSurface)
+            bottomCenter = Utils.getSnappedToSurface(world, startPoint.getX(), startPoint.getY(), startPoint.getZ(), surfaceDirection);
+        else
+            bottomCenter = startPoint;
+
+        if (bottomCenter != null) {
+            BlockPos currentCenter = null;
+            int[] wBounds = Utils.divideByTwo(width);
+            int[] lBounds = Utils.divideByTwo(width);
+            boolean placeNewSectionSupport = false;
+
+            for (int y = 0; y <= height; y++) {
+                do {
+                    currentCenter = BlockDrawing.localPosition(currentOffset[0], y, currentOffset[1], bottomCenter.getX(), bottomCenter.getY(), bottomCenter.getZ(), localUp);
+                    placeNewSectionSupport = false;
+
+                    // iterate over the x and z positions relative to the center position
+                    for (int wOffset = -wBounds[0]; wOffset < wBounds[1]; wOffset++) {
+                        for (int lOffset = -lBounds[0]; lOffset < lBounds[1]; lOffset++) {
+                            BlockPos pos = localPosition(wOffset, 0, lOffset, currentCenter.getX(), currentCenter.getY(), currentCenter.getZ(), localUp);
+
+                            world.setBlock(pos, block.defaultBlockState(), 3);
+                        }
+                    }
+
+                    if (currentRowInSection++ > rowsPerSection) {
+                        currentOffset[0] += offsetDirection[0];
+                        currentOffset[1] += offsetDirection[1];
+
+                        // currentCenter = localPosition(currentOffset[0], y, currentOffset[1], bottomCenter.getX(), bottomCenter.getY(), bottomCenter.getZ(), localUp);
+
+                        //world.setBlock(currentCenter, block.defaultBlockState(), 3);
+
+                        currentRowInSection = 0;
+                        placeNewSectionSupport = true;
+                    }
+
+                }while(placeNewSectionSupport);
+            }
+
+            return currentCenter;
+        }
+
+        return null;
+    }
+
+    public static void disperse(double x, double y, double z, int quantity, int localXRange, int localYRange, int localZRange, Orientation localUp, Consumer<BlockPos> action){
+        for (int i = 0; i < quantity; i++) {
+            int xOffset = Utils.randomRange(-localXRange, localXRange);
+            int yOffset = Utils.randomRange(-localYRange, localYRange);
+            int zOffset = Utils.randomRange(-localZRange, localZRange);
+
+            BlockPos pos = localPosition(xOffset, yOffset, zOffset, x, y, z, localUp);
+            action.accept(pos);
+        }
+    }
+
+    public static void disperse(double x, double y, double z, int minQuantity, int maxQuantity, int localXRange, int localYRange, int localZRange, Orientation localUp, Consumer<BlockPos> action){
+        int quantity = Utils.randomRange(minQuantity, maxQuantity);
+
+        for (int i = 0; i < quantity; i++) {
+            int xOffset = Utils.randomRange(-localXRange, localXRange);
+            int yOffset = Utils.randomRange(-localYRange, localYRange);
+            int zOffset = Utils.randomRange(-localZRange, localZRange);
+
+            BlockPos pos = localPosition(xOffset, yOffset, zOffset, x, y, z, localUp);
+            action.accept(pos);
+        }
+    }
     public static Orientation getRelativeOrientation(Orientation currentOrientation, Orientation absoluteDirection){
         return switch (currentOrientation) {
             case UP:

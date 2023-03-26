@@ -1097,6 +1097,23 @@
         ]
       },
       "path": "~/Blocks"
+    },
+    {
+      "name": "PurpuraCapBlock",
+      "type": "block",
+      "sortid": 112,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "purpura_cap_block",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/caviercaves/blockstates/purpura_cap_block.json",
+          "src/main/resources/assets/caviercaves/models/item/purpura_cap_block.json",
+          "src/main/java/net/gglobensky/caviercaves/block/PurpuraCapBlockBlock.java",
+          "src/main/resources/assets/caviercaves/models/block/purpura_cap_block.json"
+        ]
+      },
+      "path": "~/Blocks"
     }
   ],
   "variable_elements": [],
@@ -1110,11 +1127,12 @@
       "block.caviercaves.red_crystal": "Red Selenite Crystal",
       "block.caviercaves.purple_crystal": "Purple Selenite Crystal",
       "block.caviercaves.ghost_fungus_block": "Ghost Fungus Block",
-      "block.caviercaves.black_marble": "Black Marble",
       "block.caviercaves.dull_moon_stone_wall": "Dull Moonstone Wall",
+      "block.caviercaves.black_marble": "Black Marble",
       "block.caviercaves.ghost_fungus": "Ghost Fungus",
       "block.caviercaves.yellow_crystal": "Yellow Selenite Crystal",
       "itemGroup.tabcavier_caves": "Cavier Caves",
+      "block.caviercaves.purpura_cap_block": "Ghost Fungus Block",
       "block.caviercaves.green_crystal": "Green Selenite Crystal",
       "block.caviercaves.petrified_oak_log": "Petrified Oak Log",
       "block.caviercaves.purpura_cap": "Purpura Cap",

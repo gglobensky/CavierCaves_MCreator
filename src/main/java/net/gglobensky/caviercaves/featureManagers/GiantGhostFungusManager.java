@@ -2,6 +2,7 @@ package net.gglobensky.caviercaves.featureManagers;
 
 import net.gglobensky.caviercaves.enums.Orientation;
 import net.gglobensky.caviercaves.procedures.Utils;
+import net.gglobensky.caviercaves.utils.BlockDrawing;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
@@ -50,19 +51,27 @@ public class GiantGhostFungusManager {
             if (surfaceYLevel != null && world.getBiome(new BlockPos(x + xOffset, surfaceYLevel, z + zOffset)).is(new ResourceLocation("caviercaves:spectral_caverns"))) {
                 if (mushroomHeight < 4){
                     BlockPos capStart = createSmallTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    createSmallCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+
+                    if (capStart != null)
+                        createSmallCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else if (mushroomHeight < 8){
                     BlockPos capStart = createNormalTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    createNormalCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+
+                    if (capStart != null)
+                        createNormalCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else if (mushroomHeight < 12){
                     BlockPos capStart = createLongTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    createLargeCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+
+                    if (capStart != null)
+                        createLargeCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else{
                     BlockPos capStart = createThickTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
-                    createThickCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+
+                    if (capStart != null)
+                        createThickCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
             }
 
@@ -76,7 +85,7 @@ public class GiantGhostFungusManager {
         int maxNumberOfBentSections = 1;
         float bendingChance = 0f;
 
-        return createTrunk(world, x, y, z, minTrunkHeight, maxTrunkHeight, trunkThickness, maxNumberOfBentSections, bendingChance);
+        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, minTrunkHeight, maxTrunkHeight, 1, maxNumberOfBentSections, Orientation.UP, CaviercavesModBlocks.GHOST_FUNGUS_STEM.get(), true);
     }
 
     private static BlockPos createNormalTrunk(LevelAccessor world, double x, double y, double z){
@@ -86,7 +95,7 @@ public class GiantGhostFungusManager {
         int maxNumberOfBentSections = 2;
         float bendingChance = 0.5f;
 
-        return createTrunk(world, x, y, z, minTrunkHeight, maxTrunkHeight, trunkThickness, maxNumberOfBentSections, bendingChance);
+        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, minTrunkHeight, maxTrunkHeight, 1, maxNumberOfBentSections, Orientation.UP, CaviercavesModBlocks.GHOST_FUNGUS_STEM.get(), true);
     }
 
     private static BlockPos createLongTrunk(LevelAccessor world, double x, double y, double z){
@@ -96,7 +105,7 @@ public class GiantGhostFungusManager {
         int maxNumberOfBentSections = 3;
         float bendingChance = 0.75f;
 
-        return createTrunk(world, x, y, z, minTrunkHeight, maxTrunkHeight, trunkThickness, maxNumberOfBentSections, bendingChance);
+        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, minTrunkHeight, maxTrunkHeight, 1, maxNumberOfBentSections, Orientation.UP, CaviercavesModBlocks.GHOST_FUNGUS_STEM.get(), true);
     }
 
     private static BlockPos createThickTrunk(LevelAccessor world, double x, double y, double z){
@@ -106,7 +115,7 @@ public class GiantGhostFungusManager {
         int maxNumberOfBentSections = 4;
         float bendingChance = 0.5f;
 
-        return createTrunk(world, x, y, z, minTrunkHeight, maxTrunkHeight, trunkThickness, maxNumberOfBentSections, bendingChance);
+        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, minTrunkHeight, maxTrunkHeight, 1, maxNumberOfBentSections, Orientation.UP, CaviercavesModBlocks.GHOST_FUNGUS_STEM.get(), true);
     }
 
     private static void createSmallCap(LevelAccessor world, double x, double y, double z){
@@ -156,7 +165,7 @@ public class GiantGhostFungusManager {
 
         createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, capRadius, true);
     }
-
+/*
     private static BlockPos createTrunk(LevelAccessor world, double x, double y, double z, int minTrunkHeight, int maxTrunkHeight, int trunkThickness, int maxNumberOfBentSections, float bendingChance){
         int trunkHeight = Utils.randomRange(minTrunkHeight, maxTrunkHeight);
         int orientationIndex = (int) (Math.random() * orientations.length);
@@ -195,7 +204,7 @@ public class GiantGhostFungusManager {
 
         return new BlockPos(x + currentOrientation[0], y + trunkHeight, z + currentOrientation[1]);
     }
-
+*/
     private static void createCap(LevelAccessor world, double x, double y, double z, float skirtChance, float doubleSkirtChance, int capHeight, int widthDecreaseRate, int heightIncreaseRate, int capRadius, boolean thickCap){
         if (Math.random() < skirtChance){
             createCapSkirt(world, x, y - 1, z, capRadius, CornerType.getValue(Utils.randomRange(0, 3)), thickCap);

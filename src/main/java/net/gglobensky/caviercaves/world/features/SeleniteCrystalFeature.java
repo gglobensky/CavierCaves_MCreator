@@ -63,7 +63,7 @@ public class SeleniteCrystalFeature extends Feature<NoneFeatureConfiguration> {
 			return false;*/
 
 		CrystalManager.createCrystals(world, x, y, z);
-		CrystalManager.createLargeCrystals(world, x, y, z);
+		//CrystalManager.createLargeCrystals(world, x, y, z);
 
 		return true;
 	}

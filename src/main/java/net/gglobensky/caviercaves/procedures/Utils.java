@@ -31,9 +31,9 @@ public class Utils {
 				}
 			} else {
 				surfaceYLevel = y + j;
-				if (hasPassedStoneBlock && isAirOrFluid(world, x, surfaceYLevel, z) && (world.getBlockState(new BlockPos(x, surfaceYLevel - 1, z))).is(stoneTag)) {
-					surfaceYLevel = surfaceYLevel - 1;
-					return surfaceYLevel;
+				if (hasPassedStoneBlock && isAirOrFluid(world, x, surfaceYLevel, z)) {
+					//surfaceYLevel = surfaceYLevel - 1;
+					return surfaceYLevel - 1;
 				}
 
 				hasPassedStoneBlock = (world.getBlockState(new BlockPos(x, surfaceYLevel, z))).is(stoneTag);
@@ -43,6 +43,7 @@ public class Utils {
 		return null;
 	}
 
+	// TODO: Could make blocktag a param array
 	public static Double getCeilingYLevel(LevelAccessor world, double x, double y, double z){
 		Double surfaceYLevel = null;
 		boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
@@ -52,13 +53,13 @@ public class Utils {
 			if (hasStartedInNonSolid) {
 				surfaceYLevel = y + j;
 				if ((world.getBlockState(new BlockPos(x, surfaceYLevel, z))).is(stoneTag)) {
-					surfaceYLevel = surfaceYLevel - 1;
+					//surfaceYLevel = surfaceYLevel - 1;
 					return surfaceYLevel;
 				}
 			} else {
 				surfaceYLevel = y - j;
-				if (hasPassedStoneBlock && isAirOrFluid(world, x, surfaceYLevel, z) && (world.getBlockState(new BlockPos(x, surfaceYLevel + 1, z))).is(stoneTag)) {
-					return surfaceYLevel;
+				if (hasPassedStoneBlock && isAirOrFluid(world, x, surfaceYLevel, z)) {
+					return surfaceYLevel + 1;
 				}
 
 				hasPassedStoneBlock = (world.getBlockState(new BlockPos(x, surfaceYLevel, z))).is(stoneTag);
@@ -68,7 +69,7 @@ public class Utils {
 		return null;
 	}
 
-	public static Double getNorthWallZValue(LevelAccessor world, double x, double y, double z){
+	public static Double getSouthWallZValue(LevelAccessor world, double x, double y, double z){
 	    Double surfaceZValue = null;
 	    boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
 		boolean hasPassedStoneBlock = false;
@@ -77,13 +78,13 @@ public class Utils {
 	        if (hasStartedInNonSolid) {
 	            surfaceZValue = z + j;
 	            if ((world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag)) {
-	                surfaceZValue = surfaceZValue - 1;
+	                //surfaceZValue = surfaceZValue - 1;
 	                return surfaceZValue;
 	            }
 	        } else {
 	            surfaceZValue = z - j;
-	            if (hasPassedStoneBlock && isAirOrFluid(world, x, y, surfaceZValue) && (world.getBlockState(new BlockPos(x, y, surfaceZValue + 1))).is(stoneTag)) {
-	                return surfaceZValue;
+	            if (hasPassedStoneBlock && isAirOrFluid(world, x, y, surfaceZValue)) {
+	                return surfaceZValue + 1;
 	            }
 
 				hasPassedStoneBlock = (world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag);
@@ -93,7 +94,7 @@ public class Utils {
 	    return null;
 	}
 
-	public static Double getSouthWallZValue(LevelAccessor world, double x, double y, double z){
+	public static Double getNorthWallZValue(LevelAccessor world, double x, double y, double z){
 	    Double surfaceZValue = null;
 	    boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
 		boolean hasPassedStoneBlock = false;
@@ -101,14 +102,14 @@ public class Utils {
 	    for (int j = 1; j < 50; j++) {
 	        if (hasStartedInNonSolid) {
 	            surfaceZValue = z - j;
-	            if (hasPassedStoneBlock && (world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag)) {
+	            if ((world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag)) {
 	                surfaceZValue = surfaceZValue + 1;
 	                return surfaceZValue;
 	            }
 	        } else {
 	            surfaceZValue = z + j;
-	            if (isAirOrFluid(world, x, y, surfaceZValue) && (world.getBlockState(new BlockPos(x, y, surfaceZValue - 1))).is(stoneTag)) {
-	                return surfaceZValue;
+	            if (hasPassedStoneBlock && isAirOrFluid(world, x, y, surfaceZValue)) {
+	                return surfaceZValue - 1;
 	            }
 
 				hasPassedStoneBlock = (world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag);
@@ -127,13 +128,13 @@ public class Utils {
 	        if (hasStartedInNonSolid) {
 	            surfaceXValue = x - j;
 	            if ((world.getBlockState(new BlockPos(surfaceXValue, y, z))).is(stoneTag)) {
-	                surfaceXValue = surfaceXValue + 1;
+	                //surfaceXValue = surfaceXValue + 1;
 	                return surfaceXValue;
 	            }
 	        } else {
 	            surfaceXValue = x + j;
-	            if (hasPassedStoneBlock && isAirOrFluid(world, surfaceXValue, y, z) && (world.getBlockState(new BlockPos(surfaceXValue - 1, y, z))).is(stoneTag)) {
-	                return surfaceXValue;
+	            if (hasPassedStoneBlock && isAirOrFluid(world, surfaceXValue, y, z)) {
+	                return surfaceXValue - 1;
 	            }
 
 				hasPassedStoneBlock = (world.getBlockState(new BlockPos(surfaceXValue, y, z))).is(stoneTag);
@@ -152,13 +153,13 @@ public class Utils {
 	        if (hasStartedInNonSolid) {
 	            surfaceXValue = x + j;
 	            if ((world.getBlockState(new BlockPos(surfaceXValue, y, z))).is(stoneTag)) {
-	                surfaceXValue = surfaceXValue - 1;
+	                //surfaceXValue = surfaceXValue - 1;
 	                return surfaceXValue;
 	            }
 	        } else {
 	            surfaceXValue = x - j;
-	            if (hasPassedStoneBlock && isAirOrFluid(world, surfaceXValue, y, z) & (world.getBlockState(new BlockPos(surfaceXValue + 1, y, z))).is(stoneTag)) {
-	                return surfaceXValue;
+	            if (hasPassedStoneBlock && isAirOrFluid(world, surfaceXValue, y, z)) {
+	                return surfaceXValue + 1;
 	            }
 
 				hasPassedStoneBlock = (world.getBlockState(new BlockPos(surfaceXValue, y, z))).is(stoneTag);
@@ -179,10 +180,22 @@ public class Utils {
 	}
 
 	public static int randomRange(int min, int max){
+		if (min == max && max == 0)
+			return 0;
+
+		if (min == 0)
+			return random.nextInt(max);
+
 		if (min == max)
 			return max;
 
 		return min + random.nextInt(max - min);
+	}
+
+	public static int randomFrom(int[] array){
+		int index = random.nextInt(array.length);
+
+		return array[index];
 	}
 
 	public static boolean isUnderground(LevelAccessor world, double x, double y, double z) {
@@ -193,4 +206,60 @@ public class Utils {
 		return world.isEmptyBlock(new BlockPos(x, y, z)) || (world.getBlockState(new BlockPos(x, y, z))).getBlock() instanceof LiquidBlock;
 	}
 
+	public static int[] divideByTwo(int value) {
+		int[] result = new int[2];
+		int q = (value) / 2; // the quotient of the division
+		int r = (value) % 2; // the remainder of the division
+		int x = q; // one of the results
+		int y = q + r; // the other result
+
+		result[0] = x;
+		result[1] = y;
+		return result;
+	}
+
+	public static BlockPos getSnappedToSurface(LevelAccessor world, double x, double y, double z, Orientation surfaceDirection){
+		Double surface = null;
+		switch (surfaceDirection){
+			case UP:
+				surface = Utils.getCeilingYLevel(world, x, y, z);
+				return surface != null? new BlockPos(x, surface, z) : null;
+			case DOWN:
+				surface = Utils.getFloorYLevel(world, x, y, z);
+				return surface != null? new BlockPos(x, surface, z) : null;
+			case WEST:
+				surface = Utils.getWestWallXValue(world, x, y, z);
+				return surface != null? new BlockPos(surface, y, z) : null;
+			case EAST:
+				surface = Utils.getEastWallXValue(world, x, y, z);
+				return surface != null? new BlockPos(surface, y, z) : null;
+			case NORTH:
+				surface = Utils.getNorthWallZValue(world, x, y, z);
+				return surface != null? new BlockPos(x, y, surface) : null;
+			case SOUTH:
+				surface = Utils.getSouthWallZValue(world, x, y, z);
+				return surface != null? new BlockPos(x, y, surface) : null;
+		}
+
+		return null;
+	}
+
+	public static Orientation getOppositeDirection(double x, double y, double z, Orientation surfaceDirection){
+		switch (surfaceDirection){
+			case UP:
+				return Orientation.DOWN;
+			case DOWN:
+				return Orientation.UP;
+			case WEST:
+				return Orientation.EAST;
+			case EAST:
+				return Orientation.WEST;
+			case NORTH:
+				return Orientation.SOUTH;
+			case SOUTH:
+				return Orientation.NORTH;
+		}
+
+		return null;
+	}
 }

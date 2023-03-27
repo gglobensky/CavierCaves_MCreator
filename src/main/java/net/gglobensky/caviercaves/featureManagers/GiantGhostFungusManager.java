@@ -8,10 +8,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
 
 import net.gglobensky.caviercaves.init.CaviercavesModBlocks;
+import net.minecraft.world.level.block.Block;
 
 public class GiantGhostFungusManager {
     private static int[][] orientations = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
-
+    private static Block block = CaviercavesModBlocks.GHOST_FUNGUS_STEM.get();
     enum CornerType {
         NONE,
         SIMPLE,
@@ -44,31 +45,32 @@ public class GiantGhostFungusManager {
             xOffset = Utils.randomRange((int) (0 - xOffsetRange), (int) xOffsetRange);
             zOffset = Utils.randomRange((int) (0 - zOffsetRange), (int) zOffsetRange);
 
-            surfaceYLevel = Utils.getFloorYLevel(world, x + xOffset, y - 1, z + zOffset);
-            int ySpace = Utils.getYSpace(world, x, y, z, 20);
-            int mushroomHeight = Utils.randomRange(0, ySpace);
+            surfaceYLevel = Utils.getFloorYLevel(world, x + xOffset, y, z + zOffset);
 
             if (surfaceYLevel != null && world.getBiome(new BlockPos(x + xOffset, surfaceYLevel, z + zOffset)).is(new ResourceLocation("caviercaves:spectral_caverns"))) {
+                int ySpace = Utils.getYSpace(world, x + xOffset, y, z + zOffset, 20);
+                int mushroomHeight = Utils.randomRange(1, ySpace + 1);
+
                 if (mushroomHeight < 4){
-                    BlockPos capStart = createSmallTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
+                    BlockPos capStart = createSmallTrunk(world, mushroomHeight, x + xOffset, surfaceYLevel, z + zOffset);
 
                     if (capStart != null)
                         createSmallCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else if (mushroomHeight < 8){
-                    BlockPos capStart = createNormalTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
+                    BlockPos capStart = createNormalTrunk(world, mushroomHeight, x + xOffset, surfaceYLevel, z + zOffset);
 
                     if (capStart != null)
                         createNormalCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else if (mushroomHeight < 12){
-                    BlockPos capStart = createLongTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
+                    BlockPos capStart = createLongTrunk(world, mushroomHeight, x + xOffset, surfaceYLevel, z + zOffset);
 
                     if (capStart != null)
                         createLargeCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else{
-                    BlockPos capStart = createThickTrunk(world, x + xOffset, surfaceYLevel, z + zOffset);
+                    BlockPos capStart = createThickTrunk(world, mushroomHeight, x + xOffset, surfaceYLevel, z + zOffset);
 
                     if (capStart != null)
                         createThickCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
@@ -78,44 +80,52 @@ public class GiantGhostFungusManager {
         }
     }
 
-    private static BlockPos createSmallTrunk(LevelAccessor world, double x, double y, double z){
-        int minTrunkHeight = 2;
-        int maxTrunkHeight = 6;
+    private static BlockPos createSmallTrunk(LevelAccessor world, int height, double x, double y, double z){
         int trunkThickness = 1;
         int maxNumberOfBentSections = 1;
-        float bendingChance = 0f;
 
-        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, minTrunkHeight, maxTrunkHeight, 1, maxNumberOfBentSections, Orientation.UP, CaviercavesModBlocks.GHOST_FUNGUS_STEM.get(), true);
+        int sections = Utils.randomRange(1, maxNumberOfBentSections + 1);
+        sections = sections < height / 2? sections : 1;
+
+        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height,  sections, Orientation.UP, true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
+            world.setBlock(currentPos, block.defaultBlockState(), 3);
+        });
     }
 
-    private static BlockPos createNormalTrunk(LevelAccessor world, double x, double y, double z){
-        int minTrunkHeight = 4;
-        int maxTrunkHeight = 8;
+    private static BlockPos createNormalTrunk(LevelAccessor world, int height, double x, double y, double z){
         int trunkThickness = 1;
         int maxNumberOfBentSections = 2;
-        float bendingChance = 0.5f;
 
-        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, minTrunkHeight, maxTrunkHeight, 1, maxNumberOfBentSections, Orientation.UP, CaviercavesModBlocks.GHOST_FUNGUS_STEM.get(), true);
+        int sections = Utils.randomRange(1, maxNumberOfBentSections + 1);
+        sections = sections < height / 2? sections : 1;
+
+        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height, sections, Orientation.UP, true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
+            world.setBlock(currentPos, block.defaultBlockState(), 3);
+        });
     }
 
-    private static BlockPos createLongTrunk(LevelAccessor world, double x, double y, double z){
-        int minTrunkHeight = 8;
-        int maxTrunkHeight = 12;
+    private static BlockPos createLongTrunk(LevelAccessor world, int height, double x, double y, double z){
         int trunkThickness = 1;
         int maxNumberOfBentSections = 3;
-        float bendingChance = 0.75f;
 
-        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, minTrunkHeight, maxTrunkHeight, 1, maxNumberOfBentSections, Orientation.UP, CaviercavesModBlocks.GHOST_FUNGUS_STEM.get(), true);
+        int sections = Utils.randomRange(1, maxNumberOfBentSections + 1);
+        sections = sections < height / 2? sections : 1;
+
+        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height, sections, Orientation.UP, true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
+            world.setBlock(currentPos, block.defaultBlockState(), 3);
+        });
     }
 
-    private static BlockPos createThickTrunk(LevelAccessor world, double x, double y, double z){
-        int minTrunkHeight = 8;
-        int maxTrunkHeight = 16;
+    private static BlockPos createThickTrunk(LevelAccessor world, int height, double x, double y, double z){
         int trunkThickness = 2;
         int maxNumberOfBentSections = 4;
-        float bendingChance = 0.5f;
 
-        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, minTrunkHeight, maxTrunkHeight, 1, maxNumberOfBentSections, Orientation.UP, CaviercavesModBlocks.GHOST_FUNGUS_STEM.get(), true);
+        int sections = Utils.randomRange(1, maxNumberOfBentSections + 1);
+        sections = sections < height / 2? sections : 1;
+
+        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height, sections, Orientation.UP, true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
+            world.setBlock(currentPos, block.defaultBlockState(), 3);
+        });
     }
 
     private static void createSmallCap(LevelAccessor world, double x, double y, double z){
@@ -123,11 +133,13 @@ public class GiantGhostFungusManager {
         float doubleSkirtChance = 0.15f;
 
         int capHeight = Utils.randomRange(1, 3);
-        int capRadius = 1;
+
+        int width = 3;
+
         int widthDecreaseRate = 1;
         int heightIncreaseRate = Utils.randomRange(1, 2);
 
-        createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, capRadius, false);
+        createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, width);
     }
 
     private static void createNormalCap(LevelAccessor world, double x, double y, double z){
@@ -135,11 +147,14 @@ public class GiantGhostFungusManager {
         float doubleSkirtChance = 0.5f;
 
         int capHeight = Utils.randomRange(2, 5);
-        int capRadius = capHeight - 1;
+
+        // To center a 1 wide trunk, we need an odd numbered cap
+        int width = capHeight % 2 == 1 ? capHeight : capHeight + 1;
+
         int widthDecreaseRate = 1;
         int heightIncreaseRate = 1;
 
-        createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, capRadius, false);
+        createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, width);
     }
 
     private static void createLargeCap(LevelAccessor world, double x, double y, double z){
@@ -147,11 +162,14 @@ public class GiantGhostFungusManager {
         float doubleSkirtChance = 0.75f;
 
         int capHeight = Utils.randomRange(3, 6);
-        int capRadius = capHeight - 1;
+
+        // To center a 1 wide trunk, we need an odd numbered cap
+        int width = capHeight % 2 == 1 ? capHeight : capHeight + 1;
+
         int widthDecreaseRate = Utils.randomRange(1, 3);
         int heightIncreaseRate = Utils.randomRange(1, 3);
 
-        createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, capRadius, false);
+        createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, width);
     }
 
     private static void createThickCap(LevelAccessor world, double x, double y, double z){
@@ -159,132 +177,72 @@ public class GiantGhostFungusManager {
         float doubleSkirtChance = 0.75f;
 
         int capHeight = Utils.randomRange(3, 6);
-        int capRadius = capHeight;
+
+        // To center a 2 wide trunk, we need an even numbered cap
+        int width = capHeight % 2 == 0 ? capHeight : capHeight + 1;
         int widthDecreaseRate = Utils.randomRange(1, 3);
         int heightIncreaseRate = Utils.randomRange(1, 3);
 
-        createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, capRadius, true);
+        createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, width);
     }
-/*
-    private static BlockPos createTrunk(LevelAccessor world, double x, double y, double z, int minTrunkHeight, int maxTrunkHeight, int trunkThickness, int maxNumberOfBentSections, float bendingChance){
-        int trunkHeight = Utils.randomRange(minTrunkHeight, maxTrunkHeight);
-        int orientationIndex = (int) (Math.random() * orientations.length);
-        int[] currentOrientation = {0, 0};
 
-        if (Math.random() <= bendingChance){
-            int trunkSections = (int) (Math.random() * maxNumberOfBentSections) + 1;
-            int snappingInterval = (int) (trunkHeight / trunkSections);
-            int intervalCounter = 0;
-
-            for (int i = 0; i < trunkHeight; i++){
-                for (int xOffset = 0; xOffset < trunkThickness; xOffset++){
-                    for (int zOffset = 0; zOffset < trunkThickness; zOffset++){
-                        world.setBlock(new BlockPos(x + currentOrientation[0] + xOffset, y + i, z + currentOrientation[1] + zOffset), CaviercavesModBlocks.GHOST_FUNGUS_STEM.get().defaultBlockState(), 3);
-                    }
-                }
-
-                if (intervalCounter++ >= snappingInterval){
-                    intervalCounter = 0;
-                    currentOrientation[0] += orientations[orientationIndex][0];
-                    currentOrientation[1] += orientations[orientationIndex][1];
-
-                    for (int xOffset = 0; xOffset < trunkThickness; xOffset++){
-                        for (int zOffset = 0; zOffset < trunkThickness; zOffset++){
-                            world.setBlock(new BlockPos(x + currentOrientation[0] + xOffset, y + i, z + currentOrientation[1] + zOffset), CaviercavesModBlocks.GHOST_FUNGUS_STEM.get().defaultBlockState(), 3);
-                        }
-                    }
-                }
-            }
-        }
-        else{
-            for (int i = 0; i < trunkHeight; i++){
-                world.setBlock(new BlockPos(x, y + i, z), CaviercavesModBlocks.GHOST_FUNGUS_STEM.get().defaultBlockState(), 3);
-            }
-        }
-
-        return new BlockPos(x + currentOrientation[0], y + trunkHeight, z + currentOrientation[1]);
-    }
-*/
-    private static void createCap(LevelAccessor world, double x, double y, double z, float skirtChance, float doubleSkirtChance, int capHeight, int widthDecreaseRate, int heightIncreaseRate, int capRadius, boolean thickCap){
+    private static void createCap(LevelAccessor world, double x, double y, double z, float skirtChance, float doubleSkirtChance, int capHeight, int widthDecreaseRate, int heightIncreaseRate, int capWidth){
         if (Math.random() < skirtChance){
-            createCapSkirt(world, x, y - 1, z, capRadius, CornerType.getValue(Utils.randomRange(0, 3)), thickCap);
+
+            BlockDrawing.drawSquarePerimeter(x, y - 1, z, capWidth, Orientation.UP, (pos, width, wIndex, hIndex, lIndex) -> {
+                placeBlockWithCornerType(world, pos, wIndex, lIndex, width, CornerType.getValue(Utils.randomRange(0, 3)));
+            });
 
             if (Math.random() < doubleSkirtChance){
-                createCapSkirt(world, x, y - 2, z, capRadius, CornerType.getValue(Utils.randomRange(0, 3)), thickCap);
+                BlockDrawing.drawSquarePerimeter(x, y - 1, z, capWidth, Orientation.UP, (pos, width, wIndex, hIndex, lIndex) -> {
+                    placeBlockWithCornerType(world, pos, wIndex, lIndex, width, CornerType.getValue(Utils.randomRange(0, 3)));
+                });
             }
+
         }
 
         for (int yOffset = 0; yOffset < capHeight; yOffset += heightIncreaseRate){
             for (int i = 0; i < heightIncreaseRate; i++){
-                createCapLayer(world, x, y + yOffset + i, z, capRadius, CornerType.getValue(Utils.randomRange(0, 3)), thickCap);
+                BlockDrawing.drawSquare(x, y + yOffset + i, z, capWidth, Orientation.UP, (pos, width, wIndex, hIndex, lIndex) -> {
+                    placeBlockWithCornerType(world, pos, wIndex, lIndex, width, CornerType.getValue(Utils.randomRange(0, 3)));
+                });
+                //createCapLayer(world, x, y + yOffset + i, z, capRadius, CornerType.getValue(Utils.randomRange(0, 3)), thickCap);
             }
-            capRadius -= widthDecreaseRate;
+            capWidth -= 2 * widthDecreaseRate;
         }
     }
-
     private static void createCapLayer(LevelAccessor world, double x, double y, double z, int capRadius, CornerType cornerType, boolean thickCap){
         int upperLimit = thickCap? capRadius + 1 : capRadius;
 
         for (int xOffset = -capRadius; xOffset <= upperLimit; xOffset++){
             for (int zOffset = -capRadius; zOffset <= upperLimit; zOffset++){
-                boolean placeBlock = true;
 
-                boolean isCorner =
-                        (xOffset == -capRadius && zOffset == -capRadius) 	||
-                        (xOffset == -capRadius && zOffset == upperLimit) 	||
-                        (xOffset == upperLimit && zOffset == -capRadius) 	||
-                        (xOffset == upperLimit && zOffset == upperLimit);
-
-                if (capRadius != 1 && isCorner){
-                    if (cornerType == CornerType.NONE){
-                        placeBlock = false;
-                    }
-                    else if(cornerType == CornerType.RANDOM){
-                        if (Math.random() < 0.5f){
-                            placeBlock = false;
-                        }
-                    }
-                }
-
-                if (placeBlock){
-                    world.setBlock(new BlockPos(x + xOffset, y, z + zOffset), CaviercavesModBlocks.GHOST_FUNGUS_BLOCK.get().defaultBlockState(), 3);
-                }
             }
         }
     }
 
-    private static void createCapSkirt(LevelAccessor world, double x, double y, double z, int capRadius, CornerType cornerType, boolean thickCap){
-        int upperLimit = thickCap? capRadius + 1 : capRadius;
+    private static void placeBlockWithCornerType(LevelAccessor world, BlockPos pos, int wIndex, int lIndex, int capWidth, CornerType cornerType){
+        boolean placeBlock = true;
 
-        for (int xOffset = -capRadius; xOffset <= upperLimit; xOffset++){
-            for (int zOffset = -capRadius; zOffset <= upperLimit; zOffset++){
+        boolean isCorner =
+                (wIndex == 0 && lIndex == 0) 	||
+                (wIndex == 0 && lIndex == capWidth - 1) 	||
+                (wIndex == capWidth - 1 && lIndex == 0) 	||
+                (wIndex == capWidth - 1 && lIndex == capWidth - 1);
 
-                if ((xOffset == -capRadius || xOffset == upperLimit) || (zOffset == -capRadius || zOffset == upperLimit)){
-                    boolean placeBlock = true;
-
-                    boolean isCorner =
-                            (xOffset == -capRadius && zOffset == -capRadius) 	||
-                            (xOffset == -capRadius && zOffset == upperLimit) 	||
-                            (xOffset == upperLimit && zOffset == -capRadius) 	||
-                            (xOffset == upperLimit && zOffset == upperLimit);
-
-                    if (isCorner){
-                        if (cornerType == CornerType.NONE){
-                            placeBlock = false;
-                        }
-                        else if(cornerType == CornerType.RANDOM){
-                            if (Math.random() < 0.5f){
-                                placeBlock = false;
-                            }
-                        }
-                    }
-
-                    if (placeBlock){
-                        world.setBlock(new BlockPos(x + xOffset, y, z + zOffset), CaviercavesModBlocks.GHOST_FUNGUS_BLOCK.get().defaultBlockState(), 3);
-                    }
+        if (capWidth > 2 && isCorner){
+            if (cornerType == CornerType.NONE){
+                placeBlock = false;
+            }
+            else if(cornerType == CornerType.RANDOM){
+                if (Math.random() < 0.5f){
+                    placeBlock = false;
                 }
             }
         }
-    }
 
+        if (placeBlock){
+            world.setBlock(pos, CaviercavesModBlocks.GHOST_FUNGUS_BLOCK.get().defaultBlockState(), 3);
+        }
+    }
 }

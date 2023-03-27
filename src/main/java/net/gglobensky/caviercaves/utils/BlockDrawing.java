@@ -14,32 +14,11 @@ import java.util.function.Consumer;
 public class BlockDrawing {
 
     private static int[][] offsets = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
-    /*@FunctionalInterface
-    public interface TriConsumer<BlockPos, Integer> {
-        void accept(BlockPos pos, Integer w, Integer l);
-    }*/
-/*
-    //Adds width height length to an oriented position
-    //This way you can add values like if it was on a regular flat plane then orient it any way
-    public static BlockPos addRelativePosition(int wOffset, int lOffset, int hOffset, double x, double y, double z, Orientation orientation){
-        switch(orientation) {
-            case UP:
-                return new BlockPos(x + wOffset, y + hOffset, z + lOffset);
-            case DOWN:
-                return new BlockPos(x + wOffset, y - hOffset, z + lOffset);
-            case WEST:
-                return new BlockPos(x - hOffset, y + wOffset, z + lOffset);
-            case EAST:
-                return new BlockPos(x + hOffset, y + wOffset, z + lOffset);
-            case NORTH:
-                return new BlockPos(x + wOffset, y + lOffset, z - hOffset);
-            case SOUTH:
-                return new BlockPos(x + wOffset, y + lOffset, z + hOffset);
-            default:
-                return new BlockPos(x, y, z);
-        }
+    @FunctionalInterface
+    public interface OnBlockPosSet<BlockPos, Integer> {
+        void accept(BlockPos pos, Integer width, Integer wIndex, Integer hIndex, Integer lIndex);
     }
-*/
+
     //Adds width height length to an oriented position
     //This way you can add values like if it was on a regular flat plane then orient it any way
     public static BlockPos localPosition(int localX, int localY, int localZ, double x, double y, double z, Orientation localUpDirection){
@@ -98,27 +77,51 @@ public class BlockDrawing {
         }
     }
 
-    public static void drawSquare(double x, double y, double z, int width, Orientation orientation, Consumer<BlockPos> action){
+    public static void drawSquare(double x, double y, double z, int width, Orientation orientation, OnBlockPosSet<BlockPos, Integer> action){
         // calculate the lower and higher bounds for the x and y directions
         int[] wBounds = Utils.divideByTwo(width);
         int[] lBounds = Utils.divideByTwo(width);
+        int wIndex = 0;
+        int lIndex = 0;
+
 
         // iterate over the x and z positions relative to the center position
         for (int wOffset = -wBounds[0]; wOffset < wBounds[1]; wOffset++) {
             for (int lOffset = -lBounds[0]; lOffset < lBounds[1]; lOffset++) {
                 BlockPos pos = localPosition(wOffset, 0, lOffset, x, y, z, orientation);
 
-                action.accept(pos);
+                action.accept(pos, width, wIndex, 0, lIndex++);
             }
+            wIndex++;
+            lIndex = 0;
         }
     }
 
+    public static void drawSquarePerimeter(double x, double y, double z, int width, Orientation orientation, OnBlockPosSet<BlockPos, Integer> action){
+        // calculate the lower and higher bounds for the x and y directions
+        int[] wBounds = Utils.divideByTwo(width);
+        int[] lBounds = Utils.divideByTwo(width);
+        int wIndex = 0;
+        int lIndex = 0;
 
-    public static BlockPos createTrunkStructure(LevelAccessor world, BlockPos startPoint, int width, int minHeight, int maxHeight, int minSections, int maxSections, Orientation localUp, Block block, boolean findSurface){
-        int height = Utils.randomRange(minHeight, maxHeight + 1);
-        int sections = Utils.randomRange(minSections, maxSections + 1);
-        sections = sections < height / 2? sections : 1;
 
+        // iterate over the x and z positions relative to the center position
+        for (int wOffset = -wBounds[0]; wOffset < wBounds[1]; wOffset++) {
+            for (int lOffset = -lBounds[0]; lOffset < lBounds[1]; lOffset++) {
+                // Avoid blocks inside perimeter
+                if (!(wOffset == -wBounds[0] || wOffset == wBounds[1] - 1 || lOffset == -lBounds[0] || lOffset == lBounds[1] - 1))
+                    continue;
+
+                BlockPos pos = localPosition(wOffset, 0, lOffset, x, y, z, orientation);
+
+                action.accept(pos, width, wIndex, 0, lIndex++);
+            }
+            wIndex++;
+            lIndex = 0;
+        }
+    }
+
+    public static BlockPos createTrunkStructure(LevelAccessor world, BlockPos startPoint, int width, int height, int sections, Orientation localUp, boolean findSurface, OnBlockPosSet<BlockPos, Integer> action){
         int rowsPerSection = height / sections;
         int currentRowInSection = 0;
 
@@ -138,6 +141,9 @@ public class BlockDrawing {
             BlockPos currentCenter = null;
             int[] wBounds = Utils.divideByTwo(width);
             int[] lBounds = Utils.divideByTwo(width);
+            int wIndex = 0;
+            int lIndex = 0;
+
             boolean placeNewSectionSupport = false;
 
             for (int y = 0; y <= height; y++) {
@@ -150,17 +156,17 @@ public class BlockDrawing {
                         for (int lOffset = -lBounds[0]; lOffset < lBounds[1]; lOffset++) {
                             BlockPos pos = localPosition(wOffset, 0, lOffset, currentCenter.getX(), currentCenter.getY(), currentCenter.getZ(), localUp);
 
-                            world.setBlock(pos, block.defaultBlockState(), 3);
+                            action.accept(pos, width, wIndex, y, lIndex++);
+
+                            //world.setBlock(pos, block.defaultBlockState(), 3);
                         }
+                        wIndex++;
+                        lIndex = 0;
                     }
 
                     if (currentRowInSection++ > rowsPerSection) {
                         currentOffset[0] += offsetDirection[0];
                         currentOffset[1] += offsetDirection[1];
-
-                        // currentCenter = localPosition(currentOffset[0], y, currentOffset[1], bottomCenter.getX(), bottomCenter.getY(), bottomCenter.getZ(), localUp);
-
-                        //world.setBlock(currentCenter, block.defaultBlockState(), 3);
 
                         currentRowInSection = 0;
                         placeNewSectionSupport = true;
@@ -169,7 +175,7 @@ public class BlockDrawing {
                 }while(placeNewSectionSupport);
             }
 
-            return currentCenter;
+            return BlockDrawing.localPosition(currentOffset[0], height, currentOffset[1], bottomCenter.getX(), bottomCenter.getY(), bottomCenter.getZ(), localUp);
         }
 
         return null;

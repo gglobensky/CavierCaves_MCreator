@@ -21,6 +21,7 @@ public class CrystalManager {
             BLUE_CRYSTAL.get()
     };
 
+    //TODO: There may be a better way than using areBlocksInPath. Maybe just checking for air.
     public static void createCrystals(LevelAccessor world, double x, double y, double z){
         Block block = crystalTypes[Utils.randomRange(0, crystalTypes.length)];
 
@@ -35,7 +36,11 @@ public class CrystalManager {
 
             BlockDrawing.disperse(x, y, z, 4, 6, 10, 10, 8, localUp, (pos) -> {
                 BlockDrawing.createTrunkStructure(world, pos, width, height, sections, localUp,  true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
-                    world.setBlock(currentPos, block.defaultBlockState(), 3);
+                    BlockPos[] startPoints = {currentPos};
+
+                    if (currentPos != null && !Utils.areBlocksInPath(world, startPoints, crystalTypes, 20, localUp)) {
+                        world.setBlock(currentPos, block.defaultBlockState(), 3);
+                    }
                 });
             });
         }
@@ -59,37 +64,18 @@ public class CrystalManager {
 
             BlockDrawing.disperse(x, y, z, 1, 4, 10, 10, 8, localUp, (pos) -> {
                 BlockDrawing.createTrunkStructure(world, pos, width, height, sections, localUp,  true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
-                    if (currentPos != null && !(wIndex == wLow && hIndex == height - 1 && lIndex == lLow)){
+                    BlockPos[] startPoints = {currentPos};
+
+                    if (currentPos != null && !Utils.areBlocksInPath(world, startPoints, crystalTypes, 20, localUp) && !(wIndex == wLow && hIndex == height - 1 && lIndex == lLow)){
                         world.setBlock(currentPos, block.defaultBlockState(), 3);
 
                         if (wIndex == wPeak && hIndex == height - 1 && lIndex == lPeak){
-                            currentPos = BlockDrawing.localPosition(0, 1, 0, currentPos.getX(), currentPos.getY(), currentPos.getZ(), localUp);
-                            world.setBlock(currentPos, block.defaultBlockState(), 3);
+                            BlockPos p = BlockDrawing.localPosition(0, 1, 0, currentPos.getX(), currentPos.getY(), currentPos.getZ(), localUp);
+                            world.setBlock(p, block.defaultBlockState(), 3);
                         }
                     }
-
                 });
-
-                /*if (topCenter != null)
-                    createCrystalNub(world, topCenter, width, block, localUp);*/
             });
         }
     }
-
-    private static void createCrystalNub(LevelAccessor world, BlockPos pos, int width, Block block, Orientation localUp){
-        int[] bounds = Utils.divideByTwo(width);
-
-        int xPeak = Utils.randomFrom(bounds);
-        int zPeak = Utils.randomFrom(bounds);
-
-        int xLow = xPeak == bounds[0]? bounds[1] - 1 : bounds[0];
-        int zLow = zPeak == bounds[0]? bounds[1] - 1 : bounds[0];
-
-        BlockPos lowPos = BlockDrawing.localPosition(xLow, 0, zLow, pos.getX(), pos.getY(), pos.getZ(), localUp);
-        BlockPos peakPos = BlockDrawing.localPosition(xPeak, 1, zPeak, pos.getX(), pos.getY(), pos.getZ(), localUp);
-
-        world.setBlock(lowPos, Blocks.CAVE_AIR.defaultBlockState(), 3);
-        world.setBlock(peakPos, block.defaultBlockState(), 3);
-    }
-
 }

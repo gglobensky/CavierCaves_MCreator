@@ -206,7 +206,6 @@ public class GiantGhostFungusManager {
                 BlockDrawing.drawSquare(x, y + yOffset + i, z, capWidth, Orientation.UP, (pos, width, wIndex, hIndex, lIndex) -> {
                     placeBlockWithCornerType(world, pos, wIndex, lIndex, width, CornerType.getValue(Utils.randomRange(0, 3)));
                 });
-                //createCapLayer(world, x, y + yOffset + i, z, capRadius, CornerType.getValue(Utils.randomRange(0, 3)), thickCap);
             }
             capWidth -= 2 * widthDecreaseRate;
         }

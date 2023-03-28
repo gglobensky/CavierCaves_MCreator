@@ -2,6 +2,7 @@ package net.gglobensky.caviercaves.procedures;
 
 import net.gglobensky.caviercaves.enums.Orientation;
 import net.gglobensky.caviercaves.featureManagers.CrystalManager;
+import net.gglobensky.caviercaves.utils.BlockDrawing;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -177,6 +178,37 @@ public class Utils {
 		}
 
 		return maxScan;
+	}
+
+	public static boolean areBlocksInPath(LevelAccessor world, BlockPos[] startPoints, Block[] blocks, int maxScan, Orientation localUp){
+		for (BlockPos startPoint : startPoints){
+			for (int localY = 0; localY < maxScan; localY++){
+				BlockPos checkedPos = BlockDrawing.localPosition(0, localY, 0, startPoint.getX(), startPoint.getY(), startPoint.getZ(), localUp);
+				for (Block block : blocks){
+					if (world.getBlockState(checkedPos).getBlock() == block){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean areBlocksInPath(LevelAccessor world, BlockPos[] startPoints, String[] tags, int maxScan, Orientation localUp){
+		for (String tagName : tags){
+			TagKey<Block> tag = BlockTags.create(new ResourceLocation(tagName));
+
+			for (BlockPos startPoint : startPoints){
+				for (int localY = 0; localY < maxScan; localY++){
+					BlockPos checkedPos = BlockDrawing.localPosition(0, localY, 0, startPoint.getX(), startPoint.getY(), startPoint.getZ(), localUp);
+
+					if (world.getBlockState(checkedPos).is(tag)){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public static int randomRange(int min, int max){

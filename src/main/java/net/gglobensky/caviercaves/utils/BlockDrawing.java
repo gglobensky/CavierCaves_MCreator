@@ -146,7 +146,9 @@ public class BlockDrawing {
 
             boolean placeNewSectionSupport = false;
 
-            for (int y = 0; y <= height; y++) {
+            for (int y = 0; y < height; y++) {
+                wIndex = 0;
+                lIndex = 0;
                 do {
                     currentCenter = BlockDrawing.localPosition(currentOffset[0], y, currentOffset[1], bottomCenter.getX(), bottomCenter.getY(), bottomCenter.getZ(), localUp);
                     placeNewSectionSupport = false;

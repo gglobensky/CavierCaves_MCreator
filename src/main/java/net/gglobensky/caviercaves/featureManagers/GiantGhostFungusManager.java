@@ -48,7 +48,7 @@ public class GiantGhostFungusManager {
             surfaceYLevel = Utils.getFloorYLevel(world, x + xOffset, y, z + zOffset);
 
             if (surfaceYLevel != null && world.getBiome(new BlockPos(x + xOffset, surfaceYLevel, z + zOffset)).is(new ResourceLocation("caviercaves:spectral_caverns"))) {
-                int ySpace = Utils.getYSpace(world, x + xOffset, y, z + zOffset, 20);
+                int ySpace = Utils.getYSpace(world, x + xOffset, surfaceYLevel, z + zOffset, 20);
                 int mushroomHeight = Utils.randomRange(1, ySpace + 1);
 
                 if (mushroomHeight < 4){

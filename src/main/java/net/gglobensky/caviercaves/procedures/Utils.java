@@ -235,7 +235,12 @@ public class Utils {
 	}
 
 	public static boolean isAirOrFluid(LevelAccessor world, double x, double y, double z) {
-		return world.isEmptyBlock(new BlockPos(x, y, z)) || (world.getBlockState(new BlockPos(x, y, z))).getBlock() instanceof LiquidBlock;
+		BlockPos blockPos = new BlockPos(x, y, z);
+		return world.isEmptyBlock(blockPos) || (world.getBlockState(blockPos)).getBlock() instanceof LiquidBlock;
+	}
+
+	public static boolean isAirOrFluid(LevelAccessor world, BlockPos blockPos) {
+		return world.isEmptyBlock(blockPos) || (world.getBlockState(blockPos)).getBlock() instanceof LiquidBlock;
 	}
 
 	public static int[] divideByTwo(int value) {

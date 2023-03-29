@@ -217,7 +217,24 @@
       "locked_code": false,
       "registry_name": "bk",
       "metadata": {
-        "dependencies": []
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
       },
       "path": "~/Procedures/ProceduralCreation"
     },
@@ -1127,8 +1144,8 @@
       "block.caviercaves.red_crystal": "Red Selenite Crystal",
       "block.caviercaves.purple_crystal": "Purple Selenite Crystal",
       "block.caviercaves.ghost_fungus_block": "Ghost Fungus Block",
-      "block.caviercaves.dull_moon_stone_wall": "Dull Moonstone Wall",
       "block.caviercaves.black_marble": "Black Marble",
+      "block.caviercaves.dull_moon_stone_wall": "Dull Moonstone Wall",
       "block.caviercaves.ghost_fungus": "Ghost Fungus",
       "block.caviercaves.yellow_crystal": "Yellow Selenite Crystal",
       "itemGroup.tabcavier_caves": "Cavier Caves",

@@ -166,7 +166,7 @@ public class BlockDrawing {
                         lIndex = 0;
                     }
 
-                    if (currentRowInSection++ > rowsPerSection) {
+                    if (currentRowInSection++ >= rowsPerSection) {
                         currentOffset[0] += offsetDirection[0];
                         currentOffset[1] += offsetDirection[1];
 

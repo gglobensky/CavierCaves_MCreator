@@ -170,6 +170,80 @@ public class Utils {
 	    return null;
 	}
 
+	public static BlockPos getSurfaceLevel(LevelAccessor world, double x, double y, double z, int searchRange, Orientation localUp){
+		int startingValue = randomRange(-searchRange, searchRange);
+		int currentValue = startingValue;
+		int stepLength = startingValue < 0 ? 3 : -3;
+
+		BlockPos result = null;
+		boolean lCheck = false;
+		boolean checkedFullRange = false;
+
+		while (result == null) {
+			if (lCheck){
+				result = tryGetSurface(world, x, y, z + currentValue, localUp);
+			}
+			else{
+				result = tryGetSurface(world, x + currentValue, y, z, localUp);
+			}
+
+			currentValue += stepLength;
+
+			if (currentValue < -searchRange){
+				if (checkedFullRange){
+					if (lCheck){
+						break;
+					}
+					lCheck = true;
+					checkedFullRange = false;
+				}
+				currentValue = searchRange;
+				checkedFullRange = true;
+			}
+			else if (currentValue > searchRange){
+				if (checkedFullRange){
+					if (lCheck){
+						break;
+					}
+					lCheck = true;
+					checkedFullRange = false;
+				}
+				currentValue = -searchRange;
+				checkedFullRange = true;
+			}
+		}
+
+		return result;
+	}
+
+	public static BlockPos tryGetSurface(LevelAccessor world, double x, double y, double z, Orientation localUp){
+		Double surfaceLevel = null;
+
+		switch (localUp){
+			case UP:
+				surfaceLevel = getFloorYLevel(world, x, y, z);
+				return surfaceLevel != null ? new BlockPos(x, surfaceLevel, z) : null;
+			case DOWN:
+				surfaceLevel = getCeilingYLevel(world, x, y, z);
+				return surfaceLevel != null ? new BlockPos(x, surfaceLevel, z) : null;
+			case WEST:
+				surfaceLevel = getEastWallXValue(world, x, y, z);
+				return surfaceLevel != null ? new BlockPos(surfaceLevel, y, z) : null;
+			case EAST:
+				surfaceLevel = getWestWallXValue(world, x, y, z);
+				return surfaceLevel != null ? new BlockPos(surfaceLevel, y, z) : null;
+			case NORTH:
+				surfaceLevel = getSouthWallZValue(world, x, y, z);
+				return surfaceLevel != null ? new BlockPos(x, y, surfaceLevel) : null;
+			case SOUTH:
+				surfaceLevel = getNorthWallZValue(world, x, y, z);
+				return surfaceLevel != null ? new BlockPos(x, y, surfaceLevel) : null;
+		}
+
+		return null;
+	}
+
+
 	public static int getYSpace(LevelAccessor world, double x, double y, double z, int maxScan){
 		for (int i = 1; i < maxScan; i++){
 			if (!isAirOrFluid(world, x, y + i, z)){

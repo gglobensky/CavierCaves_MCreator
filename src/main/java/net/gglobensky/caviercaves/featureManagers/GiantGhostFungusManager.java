@@ -33,44 +33,43 @@ public class GiantGhostFungusManager {
     }
 
     public static void createMushrooms(LevelAccessor world, double x, double y, double z) {
-        int xOffsetRange = 16;
-        int zOffsetRange = 16;
+        int xOffsetRange = 8;
+        int zOffsetRange = 8;
         int xOffset = 0;
         int zOffset = 0;
 
-        Double surfaceYLevel = 0.00;
-        int MushroomQty = Utils.randomRange(12, 32);
+        int MushroomQty = Utils.randomRange(8, 24);
 
         for (int i = 0; i < (int) (MushroomQty); i++) {
             xOffset = Utils.randomRange((int) (0 - xOffsetRange), (int) xOffsetRange);
             zOffset = Utils.randomRange((int) (0 - zOffsetRange), (int) zOffsetRange);
 
-            surfaceYLevel = Utils.getFloorYLevel(world, x + xOffset, y, z + zOffset);
+            BlockPos pos = Utils.getSurfaceLevel(world, x + xOffset, y, z + zOffset, 30, Orientation.UP);
 
-            if (surfaceYLevel != null && world.getBiome(new BlockPos(x + xOffset, surfaceYLevel, z + zOffset)).is(new ResourceLocation("caviercaves:spectral_caverns"))) {
-                int ySpace = Utils.getYSpace(world, x + xOffset, surfaceYLevel, z + zOffset, 20);
-                int mushroomHeight = Utils.randomRange(1, ySpace + 1);
+            if (pos != null && world.getBiome(pos).is(new ResourceLocation("caviercaves:spectral_caverns"))) {
+                int ySpace = Utils.getYSpace(world, pos.getX(), pos.getY(), pos.getZ(), 20);
+                int mushroomHeight = Utils.randomRange(Math.max(1, ySpace / 2), ySpace + 1);
 
                 if (mushroomHeight < 4){
-                    BlockPos capStart = createSmallTrunk(world, mushroomHeight, x + xOffset, surfaceYLevel, z + zOffset);
+                    BlockPos capStart = createSmallTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
 
                     if (capStart != null)
                         createSmallCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else if (mushroomHeight < 8){
-                    BlockPos capStart = createNormalTrunk(world, mushroomHeight, x + xOffset, surfaceYLevel, z + zOffset);
+                    BlockPos capStart = createNormalTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
 
                     if (capStart != null)
                         createNormalCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else if (mushroomHeight < 12){
-                    BlockPos capStart = createLongTrunk(world, mushroomHeight, x + xOffset, surfaceYLevel, z + zOffset);
+                    BlockPos capStart = createLongTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
 
                     if (capStart != null)
                         createLargeCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
                 }
                 else{
-                    BlockPos capStart = createThickTrunk(world, mushroomHeight, x + xOffset, surfaceYLevel, z + zOffset);
+                    BlockPos capStart = createThickTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
 
                     if (capStart != null)
                         createThickCap(world, capStart.getX(), capStart.getY(), capStart.getZ());

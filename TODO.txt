@@ -1,6 +1,4 @@
 Bugfixes:
-shrooms that increase by increments of 2 can have a floating block if second last block is a corner ignored and last is not ignored
-thick trunks are still misaligned sometimes (sometimes odd numbered but why tho?)
 Make sure shrooms dont show through dirt
 
 Upside down mushroom forest 

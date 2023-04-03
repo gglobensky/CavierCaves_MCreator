@@ -1,8 +1,6 @@
-package net.gglobensky.caviercaves.procedures;
+package net.gglobensky.caviercaves.utils;
 
 import net.gglobensky.caviercaves.enums.Orientation;
-import net.gglobensky.caviercaves.featureManagers.CrystalManager;
-import net.gglobensky.caviercaves.utils.BlockDrawing;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -11,20 +9,23 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
 
 
-public class Utils {
+public class PlacementUtils {
     private static TagKey<Block> stoneTag = BlockTags.create(new ResourceLocation("forge:stone"));
 	private static final Random random = new Random();
+	private static final int surfaceHorizontalScanLength = 4;
+	private static final int surfaceVerticalScanLength = 36;
 
 	public static Double getFloorYLevel(LevelAccessor world, double x, double y, double z){
 		Double surfaceYLevel = null;
 		boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
 		boolean hasPassedStoneBlock = false;
 		
-		for (int j = 1; j < 50; j++) {
+		for (int j = 1; j < surfaceVerticalScanLength; j++) {
 			if (hasStartedInNonSolid) {
 				surfaceYLevel = y - j;
 				if ((world.getBlockState(new BlockPos(x, surfaceYLevel, z))).is(stoneTag)) {
@@ -50,7 +51,7 @@ public class Utils {
 		boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
 		boolean hasPassedStoneBlock = false;
 		
-		for (int j = 1; j < 50; j++) {
+		for (int j = 1; j < surfaceVerticalScanLength; j++) {
 			if (hasStartedInNonSolid) {
 				surfaceYLevel = y + j;
 				if ((world.getBlockState(new BlockPos(x, surfaceYLevel, z))).is(stoneTag)) {
@@ -75,7 +76,7 @@ public class Utils {
 	    boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
 		boolean hasPassedStoneBlock = false;
 	    
-	    for (int j = 1; j < 50; j++) {
+	    for (int j = 1; j < surfaceHorizontalScanLength; j++) {
 	        if (hasStartedInNonSolid) {
 	            surfaceZValue = z + j;
 	            if ((world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag)) {
@@ -100,7 +101,7 @@ public class Utils {
 	    boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
 		boolean hasPassedStoneBlock = false;
 	    
-	    for (int j = 1; j < 50; j++) {
+	    for (int j = 1; j < surfaceHorizontalScanLength; j++) {
 	        if (hasStartedInNonSolid) {
 	            surfaceZValue = z - j;
 	            if ((world.getBlockState(new BlockPos(x, y, surfaceZValue))).is(stoneTag)) {
@@ -125,7 +126,7 @@ public class Utils {
 	    boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
 		boolean hasPassedStoneBlock = false;
 	    
-	    for (int j = 1; j < 50; j++) {
+	    for (int j = 1; j < surfaceHorizontalScanLength; j++) {
 	        if (hasStartedInNonSolid) {
 	            surfaceXValue = x - j;
 	            if ((world.getBlockState(new BlockPos(surfaceXValue, y, z))).is(stoneTag)) {
@@ -150,7 +151,7 @@ public class Utils {
 	    boolean hasStartedInNonSolid = isAirOrFluid(world, x, y, z);
 		boolean hasPassedStoneBlock = false;
 	    
-	    for (int j = 1; j < 50; j++) {
+	    for (int j = 1; j < surfaceHorizontalScanLength; j++) {
 	        if (hasStartedInNonSolid) {
 	            surfaceXValue = x + j;
 	            if ((world.getBlockState(new BlockPos(surfaceXValue, y, z))).is(stoneTag)) {
@@ -170,8 +171,8 @@ public class Utils {
 	    return null;
 	}
 
-	public static BlockPos getSurfaceLevel(LevelAccessor world, double x, double y, double z, int searchRange, Orientation localUp){
-		int startingValue = randomRange(-searchRange, searchRange);
+	public static BlockPos getSurfacePosition(LevelAccessor world, double x, double y, double z, int searchRange, Orientation localUp){
+		int startingValue = RandomUtils.randomRange(-searchRange, searchRange);
 		int currentValue = startingValue;
 		int stepLength = startingValue < 0 ? 3 : -3;
 
@@ -257,7 +258,7 @@ public class Utils {
 	public static boolean areBlocksInPath(LevelAccessor world, BlockPos[] startPoints, Block[] blocks, int maxScan, Orientation localUp){
 		for (BlockPos startPoint : startPoints){
 			for (int localY = 0; localY < maxScan; localY++){
-				BlockPos checkedPos = BlockDrawing.localPosition(0, localY, 0, startPoint.getX(), startPoint.getY(), startPoint.getZ(), localUp);
+				BlockPos checkedPos = Utils.localPosition(0, localY, 0, startPoint.getX(), startPoint.getY(), startPoint.getZ(), localUp);
 				for (Block block : blocks){
 					if (world.getBlockState(checkedPos).getBlock() == block){
 						return true;
@@ -274,7 +275,7 @@ public class Utils {
 
 			for (BlockPos startPoint : startPoints){
 				for (int localY = 0; localY < maxScan; localY++){
-					BlockPos checkedPos = BlockDrawing.localPosition(0, localY, 0, startPoint.getX(), startPoint.getY(), startPoint.getZ(), localUp);
+					BlockPos checkedPos = Utils.localPosition(0, localY, 0, startPoint.getX(), startPoint.getY(), startPoint.getZ(), localUp);
 
 					if (world.getBlockState(checkedPos).is(tag)){
 						return true;
@@ -283,25 +284,6 @@ public class Utils {
 			}
 		}
 		return false;
-	}
-
-	public static int randomRange(int min, int max){
-		if (min == max && max == 0)
-			return 0;
-
-		if (min == 0)
-			return random.nextInt(max);
-
-		if (min == max)
-			return max;
-
-		return min + random.nextInt(max - min);
-	}
-
-	public static int randomFrom(int[] array){
-		int index = random.nextInt(array.length);
-
-		return array[index];
 	}
 
 	public static boolean isUnderground(LevelAccessor world, double x, double y, double z) {
@@ -315,44 +297,6 @@ public class Utils {
 
 	public static boolean isAirOrFluid(LevelAccessor world, BlockPos blockPos) {
 		return world.isEmptyBlock(blockPos) || (world.getBlockState(blockPos)).getBlock() instanceof LiquidBlock;
-	}
-
-	public static int[] divideByTwo(int value) {
-		int[] result = new int[2];
-		int q = (value) / 2; // the quotient of the division
-		int r = (value) % 2; // the remainder of the division
-		int x = q; // one of the results
-		int y = q + r; // the other result
-
-		result[0] = x;
-		result[1] = y;
-		return result;
-	}
-
-	public static BlockPos getSnappedToSurface(LevelAccessor world, double x, double y, double z, Orientation surfaceDirection){
-		Double surface = null;
-		switch (surfaceDirection){
-			case UP:
-				surface = Utils.getCeilingYLevel(world, x, y, z);
-				return surface != null? new BlockPos(x, surface, z) : null;
-			case DOWN:
-				surface = Utils.getFloorYLevel(world, x, y, z);
-				return surface != null? new BlockPos(x, surface, z) : null;
-			case WEST:
-				surface = Utils.getWestWallXValue(world, x, y, z);
-				return surface != null? new BlockPos(surface, y, z) : null;
-			case EAST:
-				surface = Utils.getEastWallXValue(world, x, y, z);
-				return surface != null? new BlockPos(surface, y, z) : null;
-			case NORTH:
-				surface = Utils.getNorthWallZValue(world, x, y, z);
-				return surface != null? new BlockPos(x, y, surface) : null;
-			case SOUTH:
-				surface = Utils.getSouthWallZValue(world, x, y, z);
-				return surface != null? new BlockPos(x, y, surface) : null;
-		}
-
-		return null;
 	}
 
 	public static Orientation getOppositeDirection(double x, double y, double z, Orientation surfaceDirection){
@@ -371,6 +315,19 @@ public class Utils {
 				return Orientation.NORTH;
 		}
 
+		return null;
+	}
+	public static final int MAX_TRIES = 10;
+
+	public static BlockPos findRandomCaveAir(LevelAccessor world, int x, int z, int lowBound, int highBound) {
+		for (int i = 0; i < MAX_TRIES; i++) {
+			int y = RandomUtils.randomRange(lowBound, highBound);
+			BlockPos pos = new BlockPos(x, y, z);
+			BlockState state = world.getBlockState(pos);
+			if (state.getMaterial().isReplaceable()) {
+				return pos;
+			}
+		}
 		return null;
 	}
 }

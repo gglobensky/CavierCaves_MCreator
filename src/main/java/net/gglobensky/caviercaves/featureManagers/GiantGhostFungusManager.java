@@ -1,8 +1,9 @@
 package net.gglobensky.caviercaves.featureManagers;
 
 import net.gglobensky.caviercaves.enums.Orientation;
-import net.gglobensky.caviercaves.procedures.Utils;
-import net.gglobensky.caviercaves.utils.BlockDrawing;
+import net.gglobensky.caviercaves.utils.PlacementUtils;
+import net.gglobensky.caviercaves.utils.ShapeUtils;
+import net.gglobensky.caviercaves.utils.RandomUtils;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
@@ -33,49 +34,39 @@ public class GiantGhostFungusManager {
     }
 
     public static void createMushrooms(LevelAccessor world, double x, double y, double z) {
-        int xOffsetRange = 8;
-        int zOffsetRange = 8;
-        int xOffset = 0;
-        int zOffset = 0;
+        Double surface = PlacementUtils.getFloorYLevel(world, x, y, z);
 
-        int MushroomQty = Utils.randomRange(8, 24);
+        if (surface == null)
+            return;
 
-        for (int i = 0; i < (int) (MushroomQty); i++) {
-            xOffset = Utils.randomRange((int) (0 - xOffsetRange), (int) xOffsetRange);
-            zOffset = Utils.randomRange((int) (0 - zOffsetRange), (int) zOffsetRange);
+        BlockPos pos = new BlockPos(x, surface, z);
 
-            BlockPos pos = Utils.getSurfaceLevel(world, x + xOffset, y, z + zOffset, 30, Orientation.UP);
+        if (world.getBiome(pos).is(new ResourceLocation("caviercaves:spectral_caverns"))) {
+            int ySpace = PlacementUtils.getYSpace(world, pos.getX(), pos.getY(), pos.getZ(), 20);
+            int mushroomHeight = RandomUtils.randomRange(Math.max(1, ySpace / 2), ySpace + 1) + 1;
+            mushroomHeight = Math.max(1, mushroomHeight - 3);
 
-            if (pos != null && world.getBiome(pos).is(new ResourceLocation("caviercaves:spectral_caverns"))) {
-                int ySpace = Utils.getYSpace(world, pos.getX(), pos.getY(), pos.getZ(), 20);
-                int mushroomHeight = Utils.randomRange(Math.max(1, ySpace / 2), ySpace + 1);
+            if (mushroomHeight < 4) {
+                BlockPos capStart = createSmallTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
 
-                if (mushroomHeight < 4){
-                    BlockPos capStart = createSmallTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
+                //if (capStart != null)
+                    createSmallCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+            } else if (mushroomHeight < 8) {
+                BlockPos capStart = createNormalTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
 
-                    if (capStart != null)
-                        createSmallCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
-                }
-                else if (mushroomHeight < 8){
-                    BlockPos capStart = createNormalTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
+                //if (capStart != null)
+                    createNormalCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+            } else if (mushroomHeight < 12) {
+                BlockPos capStart = createLongTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
 
-                    if (capStart != null)
-                        createNormalCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
-                }
-                else if (mushroomHeight < 12){
-                    BlockPos capStart = createLongTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
+                //if (capStart != null)
+                    createLargeCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
+            } else {
+                BlockPos capStart = createThickTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
 
-                    if (capStart != null)
-                        createLargeCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
-                }
-                else{
-                    BlockPos capStart = createThickTrunk(world, mushroomHeight, pos.getX(), pos.getY(), pos.getZ());
-
-                    if (capStart != null)
-                        createThickCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
-                }
+                //if (capStart != null)
+                    createThickCap(world, capStart.getX(), capStart.getY(), capStart.getZ());
             }
-
         }
     }
 
@@ -83,10 +74,10 @@ public class GiantGhostFungusManager {
         int trunkThickness = 1;
         int maxNumberOfBentSections = 1;
 
-        int sections = Utils.randomRange(1, maxNumberOfBentSections + 1);
+        int sections = RandomUtils.randomRange(1, maxNumberOfBentSections + 1);
         sections = sections < height / 2? sections : 1;
 
-        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height,  sections, Orientation.UP, true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
+        return ShapeUtils.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height,  sections, Orientation.UP, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
             world.setBlock(currentPos, block.defaultBlockState(), 3);
         });
     }
@@ -95,10 +86,10 @@ public class GiantGhostFungusManager {
         int trunkThickness = 1;
         int maxNumberOfBentSections = 2;
 
-        int sections = Utils.randomRange(1, maxNumberOfBentSections + 1);
+        int sections = RandomUtils.randomRange(1, maxNumberOfBentSections + 1);
         sections = sections < height / 2? sections : 1;
 
-        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height, sections, Orientation.UP, true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
+        return ShapeUtils.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height, sections, Orientation.UP, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
             world.setBlock(currentPos, block.defaultBlockState(), 3);
         });
     }
@@ -107,10 +98,10 @@ public class GiantGhostFungusManager {
         int trunkThickness = 1;
         int maxNumberOfBentSections = 3;
 
-        int sections = Utils.randomRange(1, maxNumberOfBentSections + 1);
+        int sections = RandomUtils.randomRange(1, maxNumberOfBentSections + 1);
         sections = sections < height / 2? sections : 1;
 
-        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height, sections, Orientation.UP, true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
+        return ShapeUtils.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height, sections, Orientation.UP,  (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
             world.setBlock(currentPos, block.defaultBlockState(), 3);
         });
     }
@@ -119,10 +110,10 @@ public class GiantGhostFungusManager {
         int trunkThickness = 2;
         int maxNumberOfBentSections = 4;
 
-        int sections = Utils.randomRange(1, maxNumberOfBentSections + 1);
+        int sections = RandomUtils.randomRange(1, maxNumberOfBentSections + 1);
         sections = sections < height / 2? sections : 1;
 
-        return BlockDrawing.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height, sections, Orientation.UP, true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
+        return ShapeUtils.createTrunkStructure(world, new BlockPos(x, y, z), trunkThickness, height, sections, Orientation.UP, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
             world.setBlock(currentPos, block.defaultBlockState(), 3);
         });
     }
@@ -131,12 +122,12 @@ public class GiantGhostFungusManager {
         float skirtChance = 1f;
         float doubleSkirtChance = 0.15f;
 
-        int capHeight = Utils.randomRange(1, 3);
+        int capHeight = RandomUtils.randomRange(1, 3);
 
         int width = 3;
 
         int widthDecreaseRate = 1;
-        int heightIncreaseRate = Utils.randomRange(1, 2);
+        int heightIncreaseRate = RandomUtils.randomRange(1, 2);
 
         createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, width);
     }
@@ -145,7 +136,7 @@ public class GiantGhostFungusManager {
         float skirtChance = 0.75f;
         float doubleSkirtChance = 0.5f;
 
-        int capHeight = Utils.randomRange(2, 5);
+        int capHeight = RandomUtils.randomRange(2, 5);
 
         // To center a 1 wide trunk, we need an odd numbered cap
         int width = capHeight % 2 == 1 ? capHeight : capHeight + 1;
@@ -160,13 +151,13 @@ public class GiantGhostFungusManager {
         float skirtChance = 0.85f;
         float doubleSkirtChance = 0.75f;
 
-        int capHeight = Utils.randomRange(3, 6);
+        int capHeight = RandomUtils.randomRange(3, 6);
 
         // To center a 1 wide trunk, we need an odd numbered cap
         int width = capHeight % 2 == 1 ? capHeight : capHeight + 1;
 
-        int widthDecreaseRate = Utils.randomRange(1, 3);
-        int heightIncreaseRate = Utils.randomRange(1, 3);
+        int widthDecreaseRate = RandomUtils.randomRange(1, 3);
+        int heightIncreaseRate = RandomUtils.randomRange(1, 3);
 
         createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, width);
     }
@@ -175,12 +166,12 @@ public class GiantGhostFungusManager {
         float skirtChance = 0.85f;
         float doubleSkirtChance = 0.75f;
 
-        int capHeight = Utils.randomRange(3, 6);
+        int capHeight = RandomUtils.randomRange(3, 6);
 
         // To center a 2 wide trunk, we need an even numbered cap
         int width = capHeight % 2 == 0 ? capHeight : capHeight + 1;
-        int widthDecreaseRate = Utils.randomRange(1, 3);
-        int heightIncreaseRate = Utils.randomRange(1, 3);
+        int widthDecreaseRate = RandomUtils.randomRange(1, 3);
+        int heightIncreaseRate = RandomUtils.randomRange(1, 3);
 
         createCap(world, x, y, z, skirtChance, doubleSkirtChance, capHeight, widthDecreaseRate, heightIncreaseRate, width);
     }
@@ -188,13 +179,13 @@ public class GiantGhostFungusManager {
     private static void createCap(LevelAccessor world, double x, double y, double z, float skirtChance, float doubleSkirtChance, int capHeight, int widthDecreaseRate, int heightIncreaseRate, int capWidth){
         if (Math.random() < skirtChance){
 
-            BlockDrawing.drawSquarePerimeter(x, y - 1, z, capWidth, Orientation.UP, (pos, width, wIndex, hIndex, lIndex) -> {
-                placeBlockWithCornerType(world, pos, wIndex, lIndex, width, CornerType.getValue(Utils.randomRange(0, 3)));
+            ShapeUtils.drawSquarePerimeter(x, y - 1, z, capWidth, Orientation.UP, (pos, width, wIndex, hIndex, lIndex) -> {
+                placeBlockWithCornerType(world, pos, wIndex, lIndex, width, CornerType.getValue(RandomUtils.randomRange(0, 3)));
             });
 
             if (Math.random() < doubleSkirtChance){
-                BlockDrawing.drawSquarePerimeter(x, y - 1, z, capWidth, Orientation.UP, (pos, width, wIndex, hIndex, lIndex) -> {
-                    placeBlockWithCornerType(world, pos, wIndex, lIndex, width, CornerType.getValue(Utils.randomRange(0, 3)));
+                ShapeUtils.drawSquarePerimeter(x, y - 1, z, capWidth, Orientation.UP, (pos, width, wIndex, hIndex, lIndex) -> {
+                    placeBlockWithCornerType(world, pos, wIndex, lIndex, width, CornerType.getValue(RandomUtils.randomRange(0, 3)));
                 });
             }
 
@@ -202,8 +193,8 @@ public class GiantGhostFungusManager {
 
         for (int yOffset = 0; yOffset < capHeight; yOffset += heightIncreaseRate){
             for (int i = 0; i < heightIncreaseRate; i++){
-                BlockDrawing.drawSquare(x, y + yOffset + i, z, capWidth, Orientation.UP, (pos, width, wIndex, hIndex, lIndex) -> {
-                    placeBlockWithCornerType(world, pos, wIndex, lIndex, width, CornerType.getValue(Utils.randomRange(0, 3)));
+                ShapeUtils.drawSquare(x, y + yOffset + i, z, capWidth, Orientation.UP, (pos, width, wIndex, hIndex, lIndex) -> {
+                    placeBlockWithCornerType(world, pos, wIndex, lIndex, width, CornerType.getValue(RandomUtils.randomRange(0, 3)));
                 });
             }
             capWidth -= 2 * widthDecreaseRate;

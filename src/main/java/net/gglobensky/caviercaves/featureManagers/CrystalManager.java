@@ -1,16 +1,15 @@
 package net.gglobensky.caviercaves.featureManagers;
 
 import net.gglobensky.caviercaves.enums.Orientation;
-import net.gglobensky.caviercaves.init.CaviercavesModBlocks;
-import net.gglobensky.caviercaves.procedures.Utils;
-import net.gglobensky.caviercaves.utils.BlockDrawing;
-import net.minecraft.Util;
+import net.gglobensky.caviercaves.utils.PlacementUtils;
+import net.gglobensky.caviercaves.utils.ShapeUtils;
+import net.gglobensky.caviercaves.utils.RandomUtils;
+import net.gglobensky.caviercaves.utils.Utils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
+import net.minecraft.server.level.WorldGenRegion;
 import static net.gglobensky.caviercaves.init.CaviercavesModBlocks.*;
 
 public class CrystalManager {
@@ -23,59 +22,86 @@ public class CrystalManager {
 
     //TODO: There may be a better way than using areBlocksInPath. Maybe just checking for air.
     public static void createCrystals(LevelAccessor world, double x, double y, double z){
-        Block block = crystalTypes[Utils.randomRange(0, crystalTypes.length)];
+        Block block = crystalTypes[RandomUtils.randomRange(0, crystalTypes.length)];
 
-        int heightBuffer = Utils.randomRange(3, 8 + 1);
-        int sectionsBuffer = Utils.randomRange(1, 3 + 1);
-        sectionsBuffer = sectionsBuffer < heightBuffer / 2? sectionsBuffer : 1;
+        Orientation localUp = Orientation.values()[RandomUtils.randomRange(0, Orientation.values().length)];
 
-        for (Orientation localUp : Orientation.values()) {
-            int width = 1;
-            int height = heightBuffer;
-            int sections = sectionsBuffer;
+        BlockPos pos = PlacementUtils.tryGetSurface(world, x, y, z, localUp);
 
-            BlockDrawing.disperse(x, y, z, 4, 6, 10, 10, 8, localUp, (pos) -> {
-                BlockDrawing.createTrunkStructure(world, pos, width, height, sections, localUp,  true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
-                    BlockPos[] startPoints = {currentPos};
-
-                    if (currentPos != null && !Utils.areBlocksInPath(world, startPoints, crystalTypes, 20, localUp)) {
-                        world.setBlock(currentPos, block.defaultBlockState(), 3);
-                    }
-                });
-            });
+        if (pos == null){
+            return;
         }
 
-        heightBuffer = Utils.randomRange(6, 12 + 1);
-        sectionsBuffer = Utils.randomRange(1, 3 + 1);
-        sectionsBuffer = sectionsBuffer < heightBuffer / 2? sectionsBuffer : 1;
+        if (RandomUtils.randomBool(0.75f)) {
+            int width = 1;
+            int height = RandomUtils.randomRange(3, 8 + 1);
+            int sections = RandomUtils.randomRange(1, 3 + 1);
 
-        for (Orientation localUp : Orientation.values()) {
+            sections = sections < height / 2? sections : 1;
+
+            ShapeUtils.createTrunkStructure(world, pos, width, height, sections, localUp, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
+                BlockPos[] startPoints = {currentPos};
+
+                if (currentPos != null && !PlacementUtils.areBlocksInPath(world, startPoints, crystalTypes, 20, localUp)) {
+                    world.setBlock(currentPos, block.defaultBlockState(), 3);
+                }
+            });
+        }
+        else {
             int width = 2;
-            int height = heightBuffer;
-            int sections = sectionsBuffer;
+            int height = RandomUtils.randomRange(6, 12 + 1);
+            int sections = RandomUtils.randomRange(1, 3 + 1);
 
-            int cornerIndexes[] = { 0, width - 1 };
-            int wPeak = Utils.randomFrom(cornerIndexes);
-            int lPeak = Utils.randomFrom(cornerIndexes);
+            sections = sections < height / 2? sections : 1;
+
+            int cornerIndexes[] = {0, width - 1};
+            int wPeak = RandomUtils.randomFrom(cornerIndexes);
+            int lPeak = RandomUtils.randomFrom(cornerIndexes);
 
             int wLow = wPeak == cornerIndexes[0] ? cornerIndexes[1] : cornerIndexes[0];
             int lLow = lPeak == cornerIndexes[0] ? cornerIndexes[1] : cornerIndexes[0];
 
+            ShapeUtils.createTrunkStructure(world, pos, width, height, sections, localUp, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
+                if (currentPos != null && !(wIndex == wLow && hIndex == height - 1 && lIndex == lLow)) {
+                    world.setBlock(currentPos, block.defaultBlockState(), 3);
 
-            BlockDrawing.disperse(x, y, z, 1, 4, 10, 10, 8, localUp, (pos) -> {
-                BlockDrawing.createTrunkStructure(world, pos, width, height, sections, localUp,  true, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
-                    BlockPos[] startPoints = {currentPos};
-
-                    if (currentPos != null && !Utils.areBlocksInPath(world, startPoints, crystalTypes, 20, localUp) && !(wIndex == wLow && hIndex == height - 1 && lIndex == lLow)){
-                        world.setBlock(currentPos, block.defaultBlockState(), 3);
-
-                        if (wIndex == wPeak && hIndex == height - 1 && lIndex == lPeak){
-                            BlockPos p = BlockDrawing.localPosition(0, 1, 0, currentPos.getX(), currentPos.getY(), currentPos.getZ(), localUp);
-                            world.setBlock(p, block.defaultBlockState(), 3);
-                        }
+                    if (wIndex == wPeak && hIndex == height - 1 && lIndex == lPeak) {
+                        BlockPos p = Utils.localPosition(0, 1, 0, currentPos.getX(), currentPos.getY(), currentPos.getZ(), localUp);
+                        world.setBlock(p, block.defaultBlockState(), 3);
                     }
-                });
+                }
             });
         }
+    }
+
+    public static boolean validateWidePlacement(LevelAccessor world, int sections, int height, BlockPos pos, int[] leanDirection, Orientation localUp){
+        BlockPos pos2 = Utils.localPosition((leanDirection[0] * sections) + 1, 0, (leanDirection[1] * sections) + 1, pos.getX(), pos.getY(), pos.getZ(), localUp);
+        BlockPos[] startPoints = { pos, pos2 };
+        BlockPos endPoint = Utils.localPosition(0, height, 0, pos2.getX(), pos2.getY(), pos2.getZ(), localUp);
+        BlockPos[] writeCheck = { pos, endPoint };
+
+        WorldGenRegion region = (WorldGenRegion)world;
+
+        for (BlockPos blockPos : writeCheck){
+            if (!region.ensureCanWrite(blockPos)){
+                return false;
+            }
+        }
+
+        return !PlacementUtils.areBlocksInPath(world, startPoints, crystalTypes, 20, localUp);
+    }
+
+    public static boolean validatePlacement(LevelAccessor world, int sections, int height, BlockPos pos, int[] leanDirection, Orientation localUp){
+        WorldGenRegion region = (WorldGenRegion)world;
+        BlockPos endPos = Utils.localPosition(0, height, 0, pos.getX(), pos.getY(), pos.getZ(), localUp);
+        BlockPos[] positions = { pos, endPos };
+
+        for (BlockPos blockPos : positions){
+            if (!region.ensureCanWrite(blockPos)){
+                return false;
+            }
+        }
+
+        return true;
     }
 }

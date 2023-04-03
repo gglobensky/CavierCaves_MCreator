@@ -1,5 +1,7 @@
 Bugfixes:
 Make sure shrooms dont show through dirt
+If new section is last block, dont do
+Crystal floating sometimes
 
 Upside down mushroom forest 
 

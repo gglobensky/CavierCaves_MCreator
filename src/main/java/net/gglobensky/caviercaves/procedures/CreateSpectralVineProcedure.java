@@ -1,6 +1,6 @@
 package net.gglobensky.caviercaves.procedures;
 
-import net.gglobensky.caviercaves.utils.PlacementUtils;
+import net.gglobensky.caviercaves.utils.ModPlacementUtils;
 import net.gglobensky.caviercaves.utils.RandomUtils;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +25,7 @@ public class CreateSpectralVineProcedure {
 			int xOffset = RandomUtils.randomRange(-xOffsetRange, xOffsetRange);
 			int zOffset = RandomUtils.randomRange(-zOffsetRange, zOffsetRange);
 
-			surfaceYLevel = PlacementUtils.getCeilingYLevel(world, x + xOffset, y, z + zOffset);
+			surfaceYLevel = ModPlacementUtils.getCeilingYLevel(world, x + xOffset, y, z + zOffset);
 			if (surfaceYLevel != null && world.getBiome(new BlockPos(x + xOffset, surfaceYLevel, z + zOffset)).is(spectralCaverns)) {
 				length = RandomUtils.randomRange(minLength, maxLength);
 				for (int k = 1; k < (length); k++) {

@@ -1,6 +1,8 @@
 
 package net.gglobensky.caviercaves.world.features;
 
+import net.gglobensky.caviercaves.procedures.SpectralVineManager;
+import net.gglobensky.caviercaves.utils.ModPlacementUtils;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
@@ -51,30 +53,17 @@ public class SpectralVinesFeature extends Feature<NoneFeatureConfiguration> {
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		if (!generate_dimensions.contains(context.level().getLevel().dimension()))
 			return false;
-		if (template == null)
-			template = context.level().getLevel().getStructureManager().getOrCreate(new ResourceLocation("caviercaves", "air_block"));
-		if (template == null)
+
+		WorldGenLevel world = context.level();
+		int x = context.origin().getX();
+		int z = context.origin().getZ();
+		BlockPos pos = ModPlacementUtils.findRandomCaveAir(world, x, z, -64, 64);
+
+		if (pos == null)
 			return false;
-		boolean anyPlaced = false;
-		if ((context.random().nextInt(1000000) + 1) <= 1000000) {
-			int count = context.random().nextInt(1) + 1;
-			for (int a = 0; a < count; a++) {
-				int i = context.origin().getX() + context.random().nextInt(16);
-				int k = context.origin().getZ() + context.random().nextInt(16);
-				int j = context.level().getHeight(Heightmap.Types.OCEAN_FLOOR_WG, i, k);
-				j = Mth.nextInt(context.random(), 8 + context.level().getMinBuildHeight(), Math.max(j, 9 + context.level().getMinBuildHeight()));
-				BlockPos spawnTo = new BlockPos(i + 0, j + 0, k + 0);
-				WorldGenLevel world = context.level();
-				int x = spawnTo.getX();
-				int y = spawnTo.getY();
-				int z = spawnTo.getZ();
-				if (template.placeInWorld(context.level(), spawnTo, spawnTo, new StructurePlaceSettings().setMirror(Mirror.values()[context.random().nextInt(2)]).setRotation(Rotation.values()[context.random().nextInt(3)]).setRandom(context.random())
-						.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false), context.random(), 2)) {
-					CreateSpectralVineProcedure.execute(world, x, y, z);
-					anyPlaced = true;
-				}
-			}
-		}
-		return anyPlaced;
+
+		SpectralVineManager.createVines(world, pos.getX(), pos.getY(), pos.getZ());
+
+		return true;
 	}
 }

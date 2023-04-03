@@ -1,7 +1,7 @@
 package net.gglobensky.caviercaves.featureManagers;
 
 import net.gglobensky.caviercaves.enums.Orientation;
-import net.gglobensky.caviercaves.utils.PlacementUtils;
+import net.gglobensky.caviercaves.utils.ModPlacementUtils;
 import net.gglobensky.caviercaves.utils.ShapeUtils;
 import net.gglobensky.caviercaves.utils.RandomUtils;
 import net.minecraft.world.level.LevelAccessor;
@@ -34,7 +34,7 @@ public class GiantGhostFungusManager {
     }
 
     public static void createMushrooms(LevelAccessor world, double x, double y, double z) {
-        Double surface = PlacementUtils.getFloorYLevel(world, x, y, z);
+        Double surface = ModPlacementUtils.getFloorYLevel(world, x, y, z);
 
         if (surface == null)
             return;
@@ -42,7 +42,7 @@ public class GiantGhostFungusManager {
         BlockPos pos = new BlockPos(x, surface, z);
 
         if (world.getBiome(pos).is(new ResourceLocation("caviercaves:spectral_caverns"))) {
-            int ySpace = PlacementUtils.getYSpace(world, pos.getX(), pos.getY(), pos.getZ(), 20);
+            int ySpace = ModPlacementUtils.getYSpace(world, pos.getX(), pos.getY(), pos.getZ(), 20);
             int mushroomHeight = RandomUtils.randomRange(Math.max(1, ySpace / 2), ySpace + 1) + 1;
             mushroomHeight = Math.max(1, mushroomHeight - 3);
 

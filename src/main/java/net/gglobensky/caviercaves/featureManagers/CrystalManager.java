@@ -1,7 +1,7 @@
 package net.gglobensky.caviercaves.featureManagers;
 
 import net.gglobensky.caviercaves.enums.Orientation;
-import net.gglobensky.caviercaves.utils.PlacementUtils;
+import net.gglobensky.caviercaves.utils.ModPlacementUtils;
 import net.gglobensky.caviercaves.utils.ShapeUtils;
 import net.gglobensky.caviercaves.utils.RandomUtils;
 import net.gglobensky.caviercaves.utils.Utils;
@@ -26,7 +26,7 @@ public class CrystalManager {
 
         Orientation localUp = Orientation.values()[RandomUtils.randomRange(0, Orientation.values().length)];
 
-        BlockPos pos = PlacementUtils.tryGetSurface(world, x, y, z, localUp);
+        BlockPos pos = ModPlacementUtils.tryGetSurface(world, x, y, z, localUp);
 
         if (pos == null){
             return;
@@ -42,7 +42,7 @@ public class CrystalManager {
             ShapeUtils.createTrunkStructure(world, pos, width, height, sections, localUp, (currentPos, currentWidth, wIndex, hIndex, lIndex) -> {
                 BlockPos[] startPoints = {currentPos};
 
-                if (currentPos != null && !PlacementUtils.areBlocksInPath(world, startPoints, crystalTypes, 20, localUp)) {
+                if (currentPos != null && !ModPlacementUtils.areBlocksInPath(world, startPoints, crystalTypes, 20, localUp)) {
                     world.setBlock(currentPos, block.defaultBlockState(), 3);
                 }
             });
@@ -88,7 +88,7 @@ public class CrystalManager {
             }
         }
 
-        return !PlacementUtils.areBlocksInPath(world, startPoints, crystalTypes, 20, localUp);
+        return !ModPlacementUtils.areBlocksInPath(world, startPoints, crystalTypes, 20, localUp);
     }
 
     public static boolean validatePlacement(LevelAccessor world, int sections, int height, BlockPos pos, int[] leanDirection, Orientation localUp){

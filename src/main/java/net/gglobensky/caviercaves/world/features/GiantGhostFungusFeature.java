@@ -2,7 +2,7 @@
 package net.gglobensky.caviercaves.world.features;
 
 import net.gglobensky.caviercaves.featureManagers.GiantGhostFungusManager;
-import net.gglobensky.caviercaves.utils.PlacementUtils;
+import net.gglobensky.caviercaves.utils.ModPlacementUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -55,7 +55,7 @@ public class GiantGhostFungusFeature extends Feature<NoneFeatureConfiguration> {
 
 		WorldGenLevel world = context.level();
 
-		BlockPos pos = PlacementUtils.findRandomCaveAir(world, x, z, -64, 64);
+		BlockPos pos = ModPlacementUtils.findRandomCaveAir(world, x, z, -64, 64);
 
 		if (pos == null)
 			return false;

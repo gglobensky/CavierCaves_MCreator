@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Random;
 
 
-public class PlacementUtils {
+public class ModPlacementUtils {
     private static TagKey<Block> stoneTag = BlockTags.create(new ResourceLocation("forge:stone"));
 	private static final Random random = new Random();
 	private static final int surfaceHorizontalScanLength = 4;
@@ -317,7 +317,7 @@ public class PlacementUtils {
 
 		return null;
 	}
-	public static final int MAX_TRIES = 10;
+	private static final int MAX_TRIES = 10;
 
 	public static BlockPos findRandomCaveAir(LevelAccessor world, int x, int z, int lowBound, int highBound) {
 		for (int i = 0; i < MAX_TRIES; i++) {

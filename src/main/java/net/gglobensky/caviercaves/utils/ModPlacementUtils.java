@@ -330,4 +330,9 @@ public class ModPlacementUtils {
 		}
 		return null;
 	}
+
+	public static boolean isHanged(LevelAccessor world, double x, double y, double z) {
+		return !((world.getBlockState(new BlockPos(x, y + 1, z))).getBlock() instanceof LiquidBlock || world.isEmptyBlock(new BlockPos(x, y + 1, z)));
+	}
+
 }

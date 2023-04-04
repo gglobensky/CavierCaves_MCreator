@@ -1,6 +1,7 @@
 
 package net.gglobensky.caviercaves.block;
 
+import net.gglobensky.caviercaves.utils.ModPlacementUtils;
 import org.checkerframework.checker.units.qual.s;
 
 import net.minecraftforge.common.PlantType;
@@ -60,7 +61,7 @@ public class GhostFungusBlock extends FlowerBlock {
 			int y = pos.getY() + 1;
 			int z = pos.getZ();
 			BlockState blockstate = world.getBlockState(pos.above());
-			additionalCondition = IsUndergroundProcedure.execute(world, x, y, z);
+			additionalCondition = ModPlacementUtils.isUnderground(world, x, y, z);
 		}
 		return additionalCondition;
 	}

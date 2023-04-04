@@ -1,8 +1,7 @@
 
 package net.gglobensky.caviercaves.block;
 
-import org.checkerframework.checker.units.qual.s;
-
+import net.gglobensky.caviercaves.utils.BlockstateUtils;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.block.state.BlockState;
@@ -49,7 +48,7 @@ public class GhostFungusBlockBlock extends Block {
 	@Override
 	public void neighborChanged(BlockState blockstate, Level world, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean moving) {
 		super.neighborChanged(blockstate, world, pos, neighborBlock, fromPos, moving);
-		OnNeighbourChangedBlockstateManagerProcedure.ShowInsideFace(blockstate, world, pos, fromPos, neighborBlock);
+		BlockstateUtils.showInsideFace(blockstate, world, pos, fromPos, neighborBlock);
 	}
 	
 	@Override

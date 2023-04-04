@@ -1,6 +1,7 @@
 
 package net.gglobensky.caviercaves.block;
 
+import net.gglobensky.caviercaves.utils.ModPlacementUtils;
 import org.checkerframework.checker.units.qual.s;
 
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -78,7 +79,7 @@ public class SpectralVineBlock extends Block implements SimpleWaterloggedBlock {
 			int x = pos.getX();
 			int y = pos.getY();
 			int z = pos.getZ();
-			return IsHangedProcedure.execute(world, x, y, z);
+			return ModPlacementUtils.isHanged(world, x, y, z);
 		}
 		return super.canSurvive(blockstate, worldIn, pos);
 	}

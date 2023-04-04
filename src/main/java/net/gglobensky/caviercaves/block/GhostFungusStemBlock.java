@@ -1,6 +1,7 @@
 
 package net.gglobensky.caviercaves.block;
 
+import net.gglobensky.caviercaves.utils.BlockstateUtils;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.block.state.BlockState;
@@ -48,7 +49,7 @@ public class GhostFungusStemBlock extends Block {
 	@Override
 	public void neighborChanged(BlockState blockstate, Level world, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean moving) {
 		super.neighborChanged(blockstate, world, pos, neighborBlock, fromPos, moving);
-		OnNeighbourChangedBlockstateManagerProcedure.ShowInsideFaceOnSameNeighbour(blockstate, world, pos, fromPos, this, neighborBlock);
+		BlockstateUtils.showInsideFaceOnSameNeighbour(blockstate, world, pos, fromPos, this, neighborBlock);
 	}
 
 	@Override

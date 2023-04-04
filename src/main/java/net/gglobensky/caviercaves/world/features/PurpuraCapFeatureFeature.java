@@ -1,6 +1,7 @@
 
 package net.gglobensky.caviercaves.world.features;
 
+import net.gglobensky.caviercaves.utils.ModPlacementUtils;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -26,7 +27,7 @@ public class PurpuraCapFeatureFeature extends RandomPatchFeature {
 		int x = context.origin().getX();
 		int y = context.origin().getY();
 		int z = context.origin().getZ();
-		if (!IsUndergroundProcedure.execute(world, x, y, z))
+		if (!ModPlacementUtils.isUnderground(world, x, y, z))
 			return false;
 		return super.place(context);
 	}

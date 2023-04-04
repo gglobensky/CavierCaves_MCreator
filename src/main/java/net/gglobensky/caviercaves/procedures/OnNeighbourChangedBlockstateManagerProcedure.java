@@ -3,22 +3,12 @@ package net.gglobensky.caviercaves.procedures;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.players.PlayerList;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.LiquidBlock;
 
-import java.util.List;
-import java.util.Collections;
-
-import net.gglobensky.caviercaves.init.CaviercavesModBlocks;
-
 public class OnNeighbourChangedBlockstateManagerProcedure {
-	public static void ShowInsideFace(BlockState blockstate, Level world, BlockPos pos, BlockPos fromPos, Block fromBlock) {
+	public static void showInsideFace(BlockState blockstate, Level world, BlockPos pos, BlockPos fromPos, Block fromBlock) {
         /*PlayerList playerlist = world.getServer().getPlayerList();
         List<ServerPlayer> players = playerlist.getPlayers();
         players.get(0).sendSystemMessage(Component.literal("pos: " + pos + ", fromPos: " + fromPos));*/
@@ -49,7 +39,7 @@ public class OnNeighbourChangedBlockstateManagerProcedure {
 		}
 	}
 
-	public static void ShowInsideFaceOnSameNeighbour(BlockState blockstate, Level world, BlockPos pos, BlockPos fromPos, Block block, Block fromBlock) {
+	public static void showInsideFaceOnSameNeighbour(BlockState blockstate, Level world, BlockPos pos, BlockPos fromPos, Block block, Block fromBlock) {
         /*PlayerList playerlist = world.getServer().getPlayerList();
         List<ServerPlayer> players = playerlist.getPlayers();
         players.get(0).sendSystemMessage(Component.literal("pos: " + pos + ", fromPos: " + fromPos));*/

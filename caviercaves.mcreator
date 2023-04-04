@@ -500,21 +500,6 @@
       "path": "~/Plants"
     },
     {
-      "name": "CreateSpectralVine",
-      "type": "procedure",
-      "sortid": 69,
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "create_spectral_vine",
-      "metadata": {
-        "files": [
-          "src/main/java/net/gglobensky/caviercaves/procedures/CreateSpectralVineProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Procedures/ProceduralCreation"
-    },
-    {
       "name": "SpectralVines",
       "type": "structure",
       "sortid": 70,
@@ -1144,8 +1129,8 @@
       "block.caviercaves.red_crystal": "Red Selenite Crystal",
       "block.caviercaves.purple_crystal": "Purple Selenite Crystal",
       "block.caviercaves.ghost_fungus_block": "Ghost Fungus Block",
-      "block.caviercaves.black_marble": "Black Marble",
       "block.caviercaves.dull_moon_stone_wall": "Dull Moonstone Wall",
+      "block.caviercaves.black_marble": "Black Marble",
       "block.caviercaves.ghost_fungus": "Ghost Fungus",
       "block.caviercaves.yellow_crystal": "Yellow Selenite Crystal",
       "itemGroup.tabcavier_caves": "Cavier Caves",

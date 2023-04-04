@@ -1,6 +1,7 @@
 
 package net.gglobensky.caviercaves.block;
 
+import net.gglobensky.caviercaves.utils.ParticleManager;
 import org.checkerframework.checker.units.qual.s;
 
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -86,6 +87,6 @@ public class RedCrystalBlock extends Block {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
-		CrystalSparkleParticleProcedure.execute(world, x, y, z);
+		ParticleManager.crystalSparkleParticle(world, x, y, z);
 	}
 }

@@ -1,6 +1,7 @@
 
 package net.gglobensky.caviercaves.world.features.plants;
 
+import net.gglobensky.caviercaves.utils.ModPlacementUtils;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
@@ -52,7 +53,7 @@ public class GhostFungusFeature extends RandomPatchFeature {
 		int x = context.origin().getX();
 		int y = context.origin().getY();
 		int z = context.origin().getZ();
-		if (!IsUndergroundProcedure.execute(world, x, y, z))
+		if (!ModPlacementUtils.isUnderground(world, x, y, z))
 			return false;
 		return super.place(context);
 	}

@@ -25,8 +25,6 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.BlockPos;
 
-import net.gglobensky.caviercaves.procedures.CreateSpectralVineProcedure;
-
 import java.util.Set;
 import java.util.List;
 

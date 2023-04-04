@@ -29,8 +29,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
-import net.gglobensky.caviercaves.procedures.IsHangedProcedure;
-
 import java.util.List;
 import java.util.Collections;
 

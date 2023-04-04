@@ -9,8 +9,6 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.resources.ResourceKey;
 
-import net.gglobensky.caviercaves.procedures.IsUndergroundProcedure;
-
 import java.util.Set;
 
 public class GhostFungusFeatureFeature extends RandomPatchFeature {

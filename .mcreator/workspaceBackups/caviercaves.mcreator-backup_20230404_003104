@@ -4,7 +4,7 @@
       "name": "GhostFungus",
       "type": "plant",
       "sortid": 2,
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "ghost_fungus",
       "metadata": {
@@ -23,7 +23,7 @@
       "name": "GhostFungusFeature",
       "type": "feature",
       "sortid": 1,
-      "compiles": true,
+      "compiles": false,
       "locked_code": false,
       "registry_name": "ghost_fungus_feature",
       "metadata": {
@@ -35,72 +35,6 @@
         ]
       },
       "path": "~/Features"
-    },
-    {
-      "name": "IsUnderground",
-      "type": "procedure",
-      "sortid": 3,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_underground",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/gglobensky/caviercaves/procedures/IsUndergroundProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/Procedures/Checks"
-    },
-    {
-      "name": "IsNotInLushCave",
-      "type": "procedure",
-      "sortid": 6,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_not_in_lush_cave",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/gglobensky/caviercaves/procedures/IsNotInLushCaveProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/Procedures/Checks"
     },
     {
       "name": "CrystalCave",
@@ -148,38 +82,6 @@
         ]
       },
       "path": "~/Particles"
-    },
-    {
-      "name": "CrystalSparkleParticle",
-      "type": "procedure",
-      "sortid": 22,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "crystal_sparkle_particle",
-      "metadata": {
-        "files": [
-          "src/main/java/net/gglobensky/caviercaves/procedures/CrystalSparkleParticleProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/Procedures/ParticleEmitters"
     },
     {
       "name": "WhiteCrystal",
@@ -237,54 +139,6 @@
         ]
       },
       "path": "~/Procedures/ProceduralCreation"
-    },
-    {
-      "name": "IsAirOrFluid",
-      "type": "procedure",
-      "sortid": 28,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_air_or_fluid",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/gglobensky/caviercaves/procedures/IsAirOrFluidProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/Procedures/Checks"
-    },
-    {
-      "name": "Utils",
-      "type": "procedure",
-      "sortid": 30,
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "utils",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/caviercaves/procedures/UtilsProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Procedures/Utils"
     },
     {
       "name": "Stone",
@@ -368,70 +222,6 @@
       "path": "~/Biomes"
     },
     {
-      "name": "OnNeighbourChangedBlockstateManager",
-      "type": "procedure",
-      "sortid": 61,
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "on_neighbour_changed_blockstate_manager",
-      "metadata": {
-        "files": [
-          "src/main/java/net/gglobensky/caviercaves/procedures/OnNeighbourChangedBlockstateManagerProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/Procedures/TriggeredActions"
-    },
-    {
-      "name": "CreateGiantGhostFungus",
-      "type": "procedure",
-      "sortid": 63,
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "create_giant_ghost_fungus",
-      "metadata": {
-        "files": [
-          "src/main/java/net/gglobensky/caviercaves/procedures/CreateGiantGhostFungusProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/Procedures/ProceduralCreation"
-    },
-    {
       "name": "GiantGhostFungus",
       "type": "structure",
       "sortid": 65,
@@ -450,7 +240,7 @@
       "name": "GhostFungusSpectralBiome",
       "type": "feature",
       "sortid": 66,
-      "compiles": true,
+      "compiles": false,
       "locked_code": false,
       "registry_name": "ghost_fungus_spectral_biome",
       "metadata": {
@@ -486,7 +276,7 @@
       "name": "SpectralVine",
       "type": "block",
       "sortid": 68,
-      "compiles": true,
+      "compiles": false,
       "locked_code": false,
       "registry_name": "spectral_vine",
       "metadata": {
@@ -498,21 +288,6 @@
         ]
       },
       "path": "~/Plants"
-    },
-    {
-      "name": "CreateSpectralVine",
-      "type": "procedure",
-      "sortid": 69,
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "create_spectral_vine",
-      "metadata": {
-        "files": [
-          "src/main/java/net/gglobensky/caviercaves/procedures/CreateSpectralVineProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Procedures/ProceduralCreation"
     },
     {
       "name": "SpectralVines",
@@ -528,39 +303,6 @@
         ]
       },
       "path": "~/Structures"
-    },
-    {
-      "name": "IsHanged",
-      "type": "procedure",
-      "sortid": 71,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_hanged",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/gglobensky/caviercaves/procedures/IsHangedProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/Procedures/Checks"
     },
     {
       "name": "DullMoonStone",
@@ -997,7 +739,7 @@
       "name": "PurpuraCap",
       "type": "plant",
       "sortid": 104,
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "purpura_cap",
       "metadata": {
@@ -1016,7 +758,7 @@
       "name": "PurpuraCapFeature",
       "type": "feature",
       "sortid": 105,
-      "compiles": true,
+      "compiles": false,
       "locked_code": false,
       "registry_name": "purpura_cap_feature",
       "metadata": {
@@ -1144,8 +886,8 @@
       "block.caviercaves.red_crystal": "Red Selenite Crystal",
       "block.caviercaves.purple_crystal": "Purple Selenite Crystal",
       "block.caviercaves.ghost_fungus_block": "Ghost Fungus Block",
-      "block.caviercaves.dull_moon_stone_wall": "Dull Moonstone Wall",
       "block.caviercaves.black_marble": "Black Marble",
+      "block.caviercaves.dull_moon_stone_wall": "Dull Moonstone Wall",
       "block.caviercaves.ghost_fungus": "Ghost Fungus",
       "block.caviercaves.yellow_crystal": "Yellow Selenite Crystal",
       "itemGroup.tabcavier_caves": "Cavier Caves",

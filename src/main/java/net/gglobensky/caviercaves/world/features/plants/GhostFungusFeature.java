@@ -21,7 +21,6 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.core.Holder;
 
-import net.gglobensky.caviercaves.procedures.IsUndergroundProcedure;
 import net.gglobensky.caviercaves.init.CaviercavesModBlocks;
 
 import java.util.Set;

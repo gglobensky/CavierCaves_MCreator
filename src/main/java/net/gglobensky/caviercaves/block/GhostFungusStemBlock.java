@@ -15,8 +15,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-import net.gglobensky.caviercaves.procedures.OnNeighbourChangedBlockstateManagerProcedure;
-
 import java.util.List;
 import java.util.Collections;
 

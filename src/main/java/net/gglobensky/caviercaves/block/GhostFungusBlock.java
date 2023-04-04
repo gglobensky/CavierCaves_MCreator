@@ -20,8 +20,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
-import net.gglobensky.caviercaves.procedures.IsUndergroundProcedure;
-
 import java.util.List;
 import java.util.Collections;
 

@@ -29,8 +29,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.client.Minecraft;
 
-import net.gglobensky.caviercaves.procedures.CrystalSparkleParticleProcedure;
-
 import java.util.List;
 import java.util.Collections;
 
